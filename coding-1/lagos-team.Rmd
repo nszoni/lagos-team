@@ -1,5 +1,6 @@
 ---
-title: "Report on Billion Price Project"
+title: "Lagos team - C1: Team Project"
+author: "Viktoria, Sara, Ali, Benjamin, Son"
 output: 
   pdf_document:
     extra_dependencies: ["float"]
@@ -10,22 +11,62 @@ output:
 # Set graph size
 #knitr::opts_chunk$set(echo = FALSE, out.width = "50%" )#fig.asp = 0.5, fig.width = 7, out.width = "90%" )
 
-library(tidyverse)
-library(modelsummary)
-library(kableExtra)
+if (!require("pacman")) {
+  install.packages("pacman")
+}
 
-# Import data and basic datamunging
-bpp_orig <- read_csv( 'https://osf.io/yhbr5/download' )
+pacman::p_load(tidyverse, dplyr, ggplot2, janitor, modelsummary, RCurl)
 
-bpp_orig <- bpp_orig %>% mutate( p_diff = price_online - price )
+# load data
 
-bpp <- bpp_orig %>% 
-  filter( is.na(sale_online) ) %>%
-  filter(!is.na(price)) %>%
-  filter(!is.na(price_online)) %>% 
-  filter(PRICETYPE == "Regular Price") %>% 
-  filter( price < 1000 ) %>% 
-  filter( p_diff < 500 & p_diff > -500 )
+x <- getURL('https://raw.githubusercontent.com/nszoni/lagos-team/main/coding-1/data/Data_DA1_HW1_Lagos.csv')
+df <- read.csv2(text = x, encoding = 'latin1')
+
+#ENCODING!!!
+
+df <- df %>% 
+        select(-X) %>% 
+          na.omit()
+
+#preliminary cleaning
+
+df[df=='N/A']<-NA
+df[df=='N']<-0
+df[df=='Y']<-1
+
+df[df=='Coca Cola, 0.5l plastic bottle']<-'Coke'
+df[df=='Snickers bar (50g)']<-'Snickers'
+
+df$longitude <- as.numeric(df$longitude)
+df$latitude <- as.numeric(df$latitude)
+df$google_rating <- as.numeric(df$google_rating)
+df$number_of_reviews <- as.integer(df$number_of_reviews)
+df$collection_date <- as.POSIXlt(df$collection_date)
+df$is_discounted <- as.factor(df$is_discounted)
+df$has_website <- as.factor(df$has_website)
+
+glimpse(df)
+
+
+# descriptive statistics
+
+#use kableExtra
+
+df %>% 
+  group_by(item_name) %>%
+      datasummary(price_huf ~  Mean + Median + SD + Min + Max + P25 + P75 + N)
+
+# Distributions
+
+ggplot(df) + 
+  geom_histogram(aes(price_huf, y=..density.., fill=item_name), alpha=0.6, position="identity", bins = 10) +
+  geom_density(aes(price_huf, y=..density.., color=item_name)) +
+  labs(x = "Price (HUF)",
+       y = "Frequency",
+       subtitle = "Snickers x Coke",
+       title = "Price distribution (HUF)",
+       caption = "lagos-team") +
+  theme_classic()
 
 ```
 

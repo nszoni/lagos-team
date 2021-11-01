@@ -1,65 +1,61 @@
-id;item_name;price_huf;is_discounted;district;shop_type;shop_name;shop_address;distance_from_city_centre_km;latitude;longitude;has_website;google_rating;number_of_reviews;collection_date;
-1;Coca Cola, 0.5l plastic bottle;299;N;10;Grocery;Reál Élelmiszer;Budapest, Hungária krt. 5-7, 1101;4;47.49088750;19.10956420;Y;3.7;160;2021-09-25 11:09;
-2;Coca Cola, 0.5l plastic bottle;449;N;10;Gas station;MOL gas station;Budapest, Könyves Kálmán krt. 23, 1101;4;47.48574250;19.10810800;Y;4.3;230;2021-09-25 11:21;
-3;Coca Cola, 0.5l plastic bottle;295;N;10;Small grocery;Csemege-Drive;Budapest, K?bányai út 43, 1101;5;47.48470220;19.11351430;N;4.6;19;2021-09-25 11:32;
-4;Coca Cola, 0.5l plastic bottle;350;N;10;Small grocery;R+E Csemege;Budapest, K?bányai út 42, 1101;5;47.48352330;19.12269520;N;4.4;13;2021-09-25 11:45;
-5;Coca Cola, 0.5l plastic bottle;250;N;10;Grocery;Vegyes kereskedés;Budapest, K?rösi Csoma stny., 1102;6;47.48265770;19.12964410;N;N/A;N/A;2021-09-25 12:10;
-6;Coca Cola, 0.5l plastic bottle;299;N;10;Grocery;Coop ABC;Budapest, Kápolna u. 33, 1103;6;47.48108800;19.13655400;Y;3.5;235;2021-09-25 12:33;
-7;Coca Cola, 0.5l plastic bottle;320;N;10;Small grocery;Mini ABC;Budapest, Ihász köz 6, 1105;7;47.48662420;19.14369140;N;4.4;11;2021-09-25 12:45;
-8;Coca Cola, 0.5l plastic bottle;259;N;10;Supermarket;Spar szupermarket;Budapest, K?rösi Csoma Sándor út 35-37, 1102;6;47.48816950;19.13529460;Y;3.7;508;2021-09-25 13:07;
-9;Coca Cola, 0.5l plastic bottle;259;N;10;Grocery;Penny Market;Budapest, Kolozsvári u. 55, 1102;6;47.49125930;19.13702770;Y;4.1;1066;2021-09-25 13:19;
-10;Coca Cola, 0.5l plastic bottle;230;N;10;Small grocery;Cédrus Piac Vásárcsarnok;Budapest, Fehér út 3, 1106;6;47.50073200;19.13640230;N;N/A;N/A;2021-09-25 14:05;
-11;Coca Cola, 0.5l plastic bottle;300;N;10;Small grocery;Lizamba ABC;Budapest, Gyakorló u. 10, 1106;7;47.50199990;19.14302380;N;4.2;10;2021-09-25 14:14;
-12;Coca Cola, 0.5l plastic bottle;320;N;10;Small grocery;Vitamin ABC;Budapest, Gergely u. 37, 1103;7;47.47604330;19.14073480;N;4.5;13;2021-09-26 10:31;
-13;Coca Cola, 0.5l plastic bottle;349;N;10;Other;Relay;Budapest, Örs vezér tere 25/A, 1106;6;47.50359600;19.13722360;Y;1.3;16;2021-09-25 13:53;
-14;Coca Cola, 0.5l plastic bottle;290;N;10;Small grocery;Élelmiszer bolt;Budapest, Sibrik Miklós út 83, 1108;8;47.47656900;19.15461420;N;3.9;48;2021-09-26 11:07;
-15;Coca Cola, 0.5l plastic bottle;299;N;10;Grocery;Príma;Budapest, Kada u. 122, 1106;8;47.47939700;19.15338400;Y;3.9;244;2021-09-26 11:26;
-16;Coca Cola, 0.5l plastic bottle;320;N;13;Small grocery;Csemegebolt;Budapest, Dózsa György út 57, 1134;2;47.52256906;19.06673552;N;3.2;5;2021-09-25 13:33;
-17;Coca Cola, 0.5l plastic bottle;259;N;13;Supermarket;Spar szupermarket;Budapest, Váci út 37, 1134;3;47.52616495;19.06414055;Y;3.8;871;2021-09-25 13:49;
-18;Coca Cola, 0.5l plastic bottle;259;Y;13;Grocery;Penny Budapest Vés?;Budapest, Vés? u. 11, 1133;3;47.52987157;19.06201644;Y;4.1;738;2021-09-25 14:00;
-19;Coca Cola, 0.5l plastic bottle;325;N;13;Small grocery;Kassák Abc;Budapest, Kassák Lajos u. 39, 1134;3;47.52620243;19.06898316;N;4.0;35;2021-09-25 14:16;
-20;Coca Cola, 0.5l plastic bottle;339;N;13;Grocery;Príma CBA;Budapest, Tüzér u. 54, 1134;3;47.52559078;19.07108524;Y;3.6;33;2021-09-25 14:24;
-21;Coca Cola, 0.5l plastic bottle;319;N;13;Grocery;Roni Abc;Budapest, Fiastyúk u. 23, 1139;5;47.54450800;19.03105120;Y;4.3;26;2021-09-29 20:20;
-22;Coca Cola, 0.5l plastic bottle;309;N;13;Grocery;Manna Abc;Budapest, Visegrádi u. 53, 1132;2;47.52024209;19.05909766;N;4.1;326;2021-09-25 15:01;
-23;Coca Cola, 0.5l plastic bottle;300;N;13;Grocery;Reál Élelmiszer;Budapest, Fiastyúk u. 59, 1139;2;47.51762090;19.04223690;N;3.7;46;2021-09-29 20:45;
-24;Coca Cola, 0.5l plastic bottle;419;N;13;Gas station;MOL gas station;Budapest, Váci út 178, 1138;6;47.55085540;19.07360400;Y;4.2;172;2021-09-28 9:18;
-25;Coca Cola, 0.5l plastic bottle;300;N;13;Small grocery;Honi Élelmiszer;Budapest, Karikás Frigyes u. 1, 1138;4;47.53510500;19.06359340;N;4.7;11;2021-09-29 20:00;
-26;Coca Cola, 0.5l plastic bottle;270;N;13;Small grocery;Sárkány;Budapest, Bulcsú u. 21b, 1134;2;47.52031541;19.06289980;N;5.0;14;2021-09-25 14:44;
-27;Coca Cola, 0.5l plastic bottle;299;N;13;Supermarket;Príma;Budapest, Ipoly u. 3, 1133;2;47.52063170;19.05379035;Y;4.0;216;2021-09-25 15:15;
-28;Coca Cola, 0.5l plastic bottle;300;N;13;Small grocery;Pronto Élelmiszer;Budapest, Visegrádi u. 19, 1132;1;47.51475855;19.05580942;N;N/A;N/A;2021-09-25 15:44;
-29;Coca Cola, 0.5l plastic bottle;259;N;13;Supermarket;Tesco;Budapest, Gács u. 1, 1138;6;47.55604060;19.07943470;y;3.9;8260;2021-09-26 10:50;
-30;Coca Cola, 0.5l plastic bottle;439;N;13;Gas station;Shell;Budapest, Váci út 196, 1138;6;47.55809200;19.07683600;y;4.2;71;2021-09-26 11:00;
-31;Snickers bar (50g);159;Y;10;Grocery;Reál Élelmiszer;Budapest, Hungária krt. 5-7, 1101;4;47.49088750;19.10956420;Y;3.7;160;2021-09-25 11:09;
-32;Snickers bar (50g);319;N;10;Gas station;MOL gas station;Budapest, Könyves Kálmán krt. 23, 1101;4;47.48574250;19.10810800;Y;4.3;230;2021-09-25 11:21;
-33;Snickers bar (50g);175;N;10;Small grocery;Csemege-Drive;Budapest, K?bányai út 43, 1101;5;47.48470220;19.11351430;N;4.6;19;2021-09-25 11:32;
-34;Snickers bar (50g);249;N;10;Small grocery;R+E Csemege;Budapest, K?bányai út 42, 1101;5;47.48352330;19.12269520;N;4.4;13;2021-09-25 11:45;
-35;Snickers bar (50g);119;N;10;Grocery;Vegyes kereskedés;Budapest, K?rösi Csoma stny., 1102;6;47.48265770;19.12964410;N;N/A;N/A;2021-09-25 12:10;
-36;Snickers bar (50g);179;N;10;Grocery;Coop ABC;Budapest, Kápolna u. 33, 1103;6;47.48108800;19.13655400;Y;3.5;235;2021-09-25 12:33;
-37;Snickers bar (50g);180;N;10;Small grocery;Mini ABC;Budapest, Ihász köz 6, 1105;7;47.48662420;19.14369140;N;4.4;11;2021-09-25 12:45;
-38;Snickers bar (50g);189;N;10;Supermarket;Spar szupermarket;Budapest, K?rösi Csoma Sándor út 35-37, 1102;6;47.48816950;19.13529460;Y;3.7;508;2021-09-25 13:07;
-39;Snickers bar (50g);179;N;10;Grocery;Penny Market;Budapest, Kolozsvári u. 55, 1102;6;47.49125930;19.13702770;Y;4.1;1066;2021-09-25 13:19;
-40;Snickers bar (50g);120;N;10;Small grocery;Cédrus Piac Vásárcsarnok;Budapest, Fehér út 3, 1106;6;47.50073200;19.13640230;N;N/A;N/A;2021-09-25 14:05;
-41;Snickers bar (50g);200;N;10;Small grocery;Lizamba ABC;Budapest, Gyakorló u. 10, 1106;7;47.50199990;19.14302380;N;4.2;10;2021-09-25 14:14;
-42;Snickers bar (50g);200;N;10;Small grocery;Vitamin ABC;Budapest, Gergely u. 37, 1103;7;47.47604330;19.14073480;N;4.5;13;2021-09-26 10:31;
-43;Snickers bar (50g);225;N;10;Other;Relay;Budapest, Örs vezér tere 25/A, 1106;6;47.50359600;19.13722360;Y;1.3;16;2021-09-25 13:53;
-44;Snickers bar (50g);190;N;10;Small grocery;Élelmiszer bolt;Budapest, Sibrik Miklós út 83, 1108;8;47.47656900;19.15461420;N;3.9;48;2021-09-26 11:07;
-45;Snickers bar (50g);189;N;10;Grocery;Príma;Budapest, Kada u. 122, 1106;8;47.47939700;19.15338400;Y;3.9;244;2021-09-26 11:26;
-46;Snickers bar (50g);180;N;13;Small grocery;Csemegebolt;Budapest, Dózsa György út 57, 1134;2;47.52256906;19.06673552;N;3.2;5;2021-09-25 13:34;
-47;Snickers bar (50g);189;N;13;Supermarket;Spar szupermarket;Budapest, Váci út 37, 1134;3;47.52616495;19.06414055;Y;3.8;871;2021-09-25 13:43;
-48;Snickers bar (50g);179;N;13;Supermarket;Penny Budapest Vés?;Budapest, Vés? u. 11, 1133;3;47.52987157;19.06201644;Y;4.1;738;2021-09-25 14:01;
-49;Snickers bar (50g);185;N;13;Small grocery;Kassák Abc;Budapest, Kassák Lajos u. 39, 1134;3;47.52620243;19.06898316;N;4.0;35;2021-09-25 14:18;
-50;Snickers bar (50g);189;N;13;Grocery;Prima CBA;Budapest, Tüzér u. 54, 1134;3;47.52559078;19.07108524;Y;3.6;33;2021-09-25 14:24;
-51;Snickers bar (50g);199;N;13;Grocery;Roni Abc;Budapest, Fiastyúk u. 23, 1139;5;47.54450800;19.03105120;Y;4.3;26;2021-09-29 20:20;
-52;Snickers bar (50g);169;N;13;Grocery;Manna Abc;Budapest, Visegrádi u. 53, 1132;2;47.52024209;19.05909766;N;4.1;326;2021-09-25 15:00;
-53;Snickers bar (50g);180;N;13;Grocery;Reál Élelmiszer;Budapest, Fiastyúk u. 59, 1139;2;47.51762090;19.04223690;N;3.7;46;2021-09-29 20:45;
-54;Snickers bar (50g);299;N;13;Gas station;MOL gas station;Budapest, Váci út 178, 1138;6;47.55085540;19.07360400;Y;4.2;172;2021-09-28 9:18;
-55;Snickers bar (50g);175;N;13;Small grocery;Honi Élelmiszer;Budapest, Karikás Frigyes u. 1, 1138;4;47.53510500;19.06359340;N;4.7;11;2021-09-29 20:00;
-56;Snickers bar (50g);119;N;13;Small grocery;Sárkány;Budapest, Bulcsú u. 21b, 1134;2;47.52031541;19.06289980;N;5.0;14;2021-09-25 14:45;
-57;Snickers bar (50g);159;N;13;Supermarket;Príma;Budapest, Ipoly u. 3, 1133;2;47.52063170;19.05379035;Y;4.0;216;2021-09-25 15:16;
-58;Snickers bar (50g);179;N;13;Small grocery;Pronto Élelmiszer;Budapest, Visegrádi u. 19, 1132;1;47.51475855;19.05580942;N;N/A;N/A;2021-09-25 15:45;
-59;Snickers bar (50g);189;N;13;Supermarket;Tesco;Budapest, Gács u. 1, 1138;6;47.55604060;19.07943470;Y;3.9;8260;2021-09-26 10:50;
-60;Snickers bar (50g);299;N;13;Gas station;Shell;Budapest, Váci út 196, 1138;6;47.55809200;19.07683600;Y;4.2;71;2021-09-26 11:00;
-;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;
+id,item_name,price_huf,is_discounted,district,shop_type,shop_name,shop_address,distance_from_city_centre_km,latitude,longitude,has_website,google_rating,number_of_reviews,collection_date
+1,"Coca Cola, 0.5l plastic bottle",299,N,10,Grocery,Real elelmiszer,"Budapest, Hungaria krt. 5-7, 1101",4,47.4908875,19.1095642,Y,3.7,160,2021-09-25T11:09:00Z
+2,"Coca Cola, 0.5l plastic bottle",449,N,10,Gas station,MOL gas station,"Budapest, Konyves Kalman krt. 23, 1101",4,47.4857425,19.108108,Y,4.3,230,2021-09-25T11:21:00Z
+3,"Coca Cola, 0.5l plastic bottle",295,N,10,Small grocery,Csemege-Drive,"Budapest, Kobanyai ut 43, 1101",5,47.4847022,19.1135143,N,4.5999999999999996,19,2021-09-25T11:32:00Z
+4,"Coca Cola, 0.5l plastic bottle",350,N,10,Small grocery,R+E Csemege,"Budapest, Kobanyai ut 42, 1101",5,47.4835233,19.1226952,N,4.4000000000000004,13,2021-09-25T11:45:00Z
+5,"Coca Cola, 0.5l plastic bottle",250,N,10,Grocery,Vegyes kereskedes,"Budapest, Korosi Csoma stny., 1102",6,47.4826577,19.1296441,N,N/A,N/A,2021-09-25T12:10:00Z
+6,"Coca Cola, 0.5l plastic bottle",299,N,10,Grocery,Coop ABC,"Budapest, Kapolna u. 33, 1103",6,47.481088,19.136554,Y,3.5,235,2021-09-25T12:33:00Z
+7,"Coca Cola, 0.5l plastic bottle",320,N,10,Small grocery,Mini ABC,"Budapest, Ihasz koz 6, 1105",7,47.4866242,19.1436914,N,4.4000000000000004,11,2021-09-25T12:45:00Z
+8,"Coca Cola, 0.5l plastic bottle",259,N,10,Supermarket,Spar szupermarket,"Budapest, Korosi Csoma Sandor ut 35-37, 1102",6,47.4881695,19.1352946,Y,3.7,508,2021-09-25T13:07:00Z
+9,"Coca Cola, 0.5l plastic bottle",259,N,10,Grocery,Penny Market,"Budapest, Kolozsvari u. 55, 1102",6,47.4912593,19.1370277,Y,4.0999999999999996,1066,2021-09-25T13:19:00Z
+10,"Coca Cola, 0.5l plastic bottle",230,N,10,Small grocery,Cedrus Piac Vasarcsarnok,"Budapest, Feher ut 3, 1106",6,47.500732,19.1364023,N,N/A,N/A,2021-09-25T14:05:00Z
+11,"Coca Cola, 0.5l plastic bottle",300,N,10,Small grocery,Lizamba ABC,"Budapest, Gyakorlo u. 10, 1106",7,47.5019999,19.1430238,N,4.2,10,2021-09-25T14:14:00Z
+12,"Coca Cola, 0.5l plastic bottle",320,N,10,Small grocery,Vitamin ABC,"Budapest, Gergely u. 37, 1103",7,47.4760433,19.1407348,N,4.5,13,2021-09-26T10:31:00Z
+13,"Coca Cola, 0.5l plastic bottle",349,N,10,Other,Relay,"Budapest, Ors vezer tere 25/A, 1106",6,47.503596,19.1372236,Y,1.3,16,2021-09-25T13:53:00Z
+14,"Coca Cola, 0.5l plastic bottle",290,N,10,Small grocery,Elelmiszer bolt,"Budapest, Sibrik Miklos ut 83, 1108",8,47.476569,19.1546142,N,3.9,48,2021-09-26T11:07:00Z
+15,"Coca Cola, 0.5l plastic bottle",299,N,10,Grocery,Prima,"Budapest, Kada u. 122, 1106",8,47.479397,19.153384,Y,3.9,244,2021-09-26T11:26:00Z
+16,"Coca Cola, 0.5l plastic bottle",320,N,13,Small grocery,Csemegebolt,"Budapest, Dozsa Gyorgy ut 57, 1134",2,47.5225690561594,19.0667355235679,N,3.2,5,2021-09-25T13:33:00Z
+17,"Coca Cola, 0.5l plastic bottle",259,N,13,Supermarket,Spar szupermarket,"Budapest, Vaci ut 37, 1134",3,47.5261649484191,19.0641405460954,Y,3.8,871,2021-09-25T13:49:00Z
+18,"Coca Cola, 0.5l plastic bottle",259,Y,13,Grocery,Penny Budapest Veso,"Budapest, Veso u. 11, 1133",3,47.5298715730035,19.0620164361766,Y,4.0999999999999996,738,2021-09-25T14:00:00Z
+19,"Coca Cola, 0.5l plastic bottle",325,N,13,Small grocery,Kassak Abc,"Budapest, Kassak Lajos u. 39, 1134",3,47.5262024300954,19.0689831594597,N,4,35,2021-09-25T14:16:00Z
+20,"Coca Cola, 0.5l plastic bottle",339,N,13,Grocery,Prima CBA,"Budapest, Tuzer u. 54, 1134",3,47.5255907750159,19.071085242865,Y,3.6,33,2021-09-25T14:24:00Z
+21,"Coca Cola, 0.5l plastic bottle",319,N,13,Grocery,Roni Abc,"Budapest, Fiastyuk u. 23, 1139",5,47.544508,19.0310512,Y,4.3,26,2021-09-29T20:20:00Z
+22,"Coca Cola, 0.5l plastic bottle",309,N,13,Grocery,Manna Abc,"Budapest, Visegradi u. 53, 1132",2,47.5202420852599,19.0590976580316,N,4.0999999999999996,326,2021-09-25T15:01:00Z
+23,"Coca Cola, 0.5l plastic bottle",300,N,13,Grocery,Real elelmiszer,"Budapest, Fiastyuk u. 59, 1139",2,47.5176209,19.0422369,N,3.7,46,2021-09-29T20:45:00Z
+24,"Coca Cola, 0.5l plastic bottle",419,N,13,Gas station,MOL gas station,"Budapest, Vaci ut 178, 1138",6,47.5508554,19.073604,Y,4.2,172,2021-09-28T09:18:00Z
+25,"Coca Cola, 0.5l plastic bottle",300,N,13,Small grocery,Honi elelmiszer,"Budapest, Karikas Frigyes u. 1, 1138",4,47.535105,19.0635934,N,4.7,11,2021-09-29T20:00:00Z
+26,"Coca Cola, 0.5l plastic bottle",270,N,13,Small grocery,Sarkany,"Budapest, Bulcsu u. 21b, 1134",2,47.5203154131539,19.0628997964928,N,5,14,2021-09-25T14:44:00Z
+27,"Coca Cola, 0.5l plastic bottle",299,N,13,Supermarket,Prima,"Budapest, Ipoly u. 3, 1133",2,47.5206316968798,19.0537903458263,Y,4,216,2021-09-25T15:15:00Z
+28,"Coca Cola, 0.5l plastic bottle",300,N,13,Small grocery,Pronto elelmiszer,"Budapest, Visegradi u. 19, 1132",1,47.5147585502667,19.0558094168357,N,N/A,N/A,2021-09-25T15:44:00Z
+29,"Coca Cola, 0.5l plastic bottle",259,N,13,Supermarket,Tesco,"Budapest, Gacs u. 1, 1138",6,47.5560406,19.0794347,y,3.9,8260,2021-09-26T10:50:00Z
+30,"Coca Cola, 0.5l plastic bottle",439,N,13,Gas station,Shell,"Budapest, Vaci ut 196, 1138",6,47.558092,19.076836,y,4.2,71,2021-09-26T11:00:00Z
+31,Snickers bar (50g),159,Y,10,Grocery,Real elelmiszer,"Budapest, Hungaria krt. 5-7, 1101",4,47.4908875,19.1095642,Y,3.7,160,2021-09-25T11:09:00Z
+32,Snickers bar (50g),319,N,10,Gas station,MOL gas station,"Budapest, Konyves Kalman krt. 23, 1101",4,47.4857425,19.108108,Y,4.3,230,2021-09-25T11:21:00Z
+33,Snickers bar (50g),175,N,10,Small grocery,Csemege-Drive,"Budapest, Kobanyai ut 43, 1101",5,47.4847022,19.1135143,N,4.5999999999999996,19,2021-09-25T11:32:00Z
+34,Snickers bar (50g),249,N,10,Small grocery,R+E Csemege,"Budapest, Kobanyai ut 42, 1101",5,47.4835233,19.1226952,N,4.4000000000000004,13,2021-09-25T11:45:00Z
+35,Snickers bar (50g),119,N,10,Grocery,Vegyes kereskedes,"Budapest, Korosi Csoma stny., 1102",6,47.4826577,19.1296441,N,N/A,N/A,2021-09-25T12:10:00Z
+36,Snickers bar (50g),179,N,10,Grocery,Coop ABC,"Budapest, Kapolna u. 33, 1103",6,47.481088,19.136554,Y,3.5,235,2021-09-25T12:33:00Z
+37,Snickers bar (50g),180,N,10,Small grocery,Mini ABC,"Budapest, Ihasz koz 6, 1105",7,47.4866242,19.1436914,N,4.4000000000000004,11,2021-09-25T12:45:00Z
+38,Snickers bar (50g),189,N,10,Supermarket,Spar szupermarket,"Budapest, Korosi Csoma Sandor ut 35-37, 1102",6,47.4881695,19.1352946,Y,3.7,508,2021-09-25T13:07:00Z
+39,Snickers bar (50g),179,N,10,Grocery,Penny Market,"Budapest, Kolozsvari u. 55, 1102",6,47.4912593,19.1370277,Y,4.0999999999999996,1066,2021-09-25T13:19:00Z
+40,Snickers bar (50g),120,N,10,Small grocery,Cedrus Piac Vasarcsarnok,"Budapest, Feher ut 3, 1106",6,47.500732,19.1364023,N,N/A,N/A,2021-09-25T14:05:00Z
+41,Snickers bar (50g),200,N,10,Small grocery,Lizamba ABC,"Budapest, Gyakorlo u. 10, 1106",7,47.5019999,19.1430238,N,4.2,10,2021-09-25T14:14:00Z
+42,Snickers bar (50g),200,N,10,Small grocery,Vitamin ABC,"Budapest, Gergely u. 37, 1103",7,47.4760433,19.1407348,N,4.5,13,2021-09-26T10:31:00Z
+43,Snickers bar (50g),225,N,10,Other,Relay,"Budapest, Ors vezer tere 25/A, 1106",6,47.503596,19.1372236,Y,1.3,16,2021-09-25T13:53:00Z
+44,Snickers bar (50g),190,N,10,Small grocery,Elelmiszer bolt,"Budapest, Sibrik Miklos ut 83, 1108",8,47.476569,19.1546142,N,3.9,48,2021-09-26T11:07:00Z
+45,Snickers bar (50g),189,N,10,Grocery,Prima,"Budapest, Kada u. 122, 1106",8,47.479397,19.153384,Y,3.9,244,2021-09-26T11:26:00Z
+46,Snickers bar (50g),180,N,13,Small grocery,Csemegebolt,"Budapest, Dozsa Gyorgy ut 57, 1134",2,47.5225690561594,19.0667355235679,N,3.2,5,2021-09-25T13:34:00Z
+47,Snickers bar (50g),189,N,13,Supermarket,Spar szupermarket,"Budapest, Vaci ut 37, 1134",3,47.5261649484191,19.0641405460954,Y,3.8,871,2021-09-25T13:43:00Z
+48,Snickers bar (50g),179,N,13,Supermarket,Penny Budapest Veso,"Budapest, Veso u. 11, 1133",3,47.5298715730035,19.0620164361766,Y,4.0999999999999996,738,2021-09-25T14:01:00Z
+49,Snickers bar (50g),185,N,13,Small grocery,Kassak Abc,"Budapest, Kassak Lajos u. 39, 1134",3,47.5262024300954,19.0689831594597,N,4,35,2021-09-25T14:18:00Z
+50,Snickers bar (50g),189,N,13,Grocery,Prima CBA,"Budapest, Tuzer u. 54, 1134",3,47.5255907750159,19.071085242865,Y,3.6,33,2021-09-25T14:24:00Z
+51,Snickers bar (50g),199,N,13,Grocery,Roni Abc,"Budapest, Fiastyuk u. 23, 1139",5,47.544508,19.0310512,Y,4.3,26,2021-09-29T20:20:00Z
+52,Snickers bar (50g),169,N,13,Grocery,Manna Abc,"Budapest, Visegradi u. 53, 1132",2,47.5202420852599,19.0590976580316,N,4.0999999999999996,326,2021-09-25T15:00:00Z
+53,Snickers bar (50g),180,N,13,Grocery,Real elelmiszer,"Budapest, Fiastyuk u. 59, 1139",2,47.5176209,19.0422369,N,3.7,46,2021-09-29T20:45:00Z
+54,Snickers bar (50g),299,N,13,Gas station,MOL gas station,"Budapest, Vaci ut 178, 1138",6,47.5508554,19.073604,Y,4.2,172,2021-09-28T09:18:00Z
+55,Snickers bar (50g),175,N,13,Small grocery,Honi elelmiszer,"Budapest, Karikas Frigyes u. 1, 1138",4,47.535105,19.0635934,N,4.7,11,2021-09-29T20:00:00Z
+56,Snickers bar (50g),119,N,13,Small grocery,Sarkany,"Budapest, Bulcsu u. 21b, 1134",2,47.5203154131539,19.0628997964928,N,5,14,2021-09-25T14:45:00Z
+57,Snickers bar (50g),159,N,13,Supermarket,Prima,"Budapest, Ipoly u. 3, 1133",2,47.5206316968798,19.0537903458263,Y,4,216,2021-09-25T15:16:00Z
+58,Snickers bar (50g),179,N,13,Small grocery,Pronto elelmiszer,"Budapest, Visegradi u. 19, 1132",1,47.5147585502667,19.0558094168357,N,N/A,N/A,2021-09-25T15:45:00Z
+59,Snickers bar (50g),189,N,13,Supermarket,Tesco,"Budapest, Gacs u. 1, 1138",6,47.5560406,19.0794347,Y,3.9,8260,2021-09-26T10:50:00Z
+60,Snickers bar (50g),299,N,13,Gas station,Shell,"Budapest, Vaci ut 196, 1138",6,47.558092,19.076836,Y,4.2,71,2021-09-26T11:00:00Z

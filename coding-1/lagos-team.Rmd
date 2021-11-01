@@ -15,7 +15,8 @@ if (!require("pacman")) {
   install.packages("pacman")
 }
 
-pacman::p_load(tidyverse, dplyr, ggplot2, janitor, modelsummary, RCurl)
+pacman::p_load(tidyverse, dplyr, ggplot2, janitor, modelsummary, RCurl,
+               kableExtra, vtable)
 
 # load data
 
@@ -54,19 +55,32 @@ glimpse(df)
 
 df %>% 
   group_by(item_name) %>%
-      datasummary(price_huf ~  Mean + Median + SD + Min + Max + P25 + P75 + N)
+      datasummary(data=., price_huf ~  Mean + Median + SD + Min + Max + P25 + P75 + N,  output = 'kableExtra')
 
 # Distributions
 
 ggplot(df) + 
   geom_histogram(aes(price_huf, y=..density.., fill=item_name), alpha=0.6, position="identity", bins = 10) +
-  geom_density(aes(price_huf, y=..density.., color=item_name)) +
+  geom_density(aes(price_huf, y=..density.., color=item_name), alpha=5) +
   labs(x = "Price (HUF)",
        y = "Frequency",
        subtitle = "Snickers x Coke",
        title = "Price distribution (HUF)",
        caption = "lagos-team") +
   theme_classic()
+
+st(df,
+   vars = c('price_huf', 'google_rating', 'number_of_reviews'),
+   summ=c('NA(x)',
+          'mean(x)',
+          'median(x)',
+          'sd(x)',
+          'min(x)',
+          'pctile(x)[5]',
+          'pctile(x)[95]',
+          'max(x)',
+          'propNA(x)'),
+   out='kable')
 
 ```
 

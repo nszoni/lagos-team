@@ -1,0 +1,223 @@
+---
+title: "Report on Snickers and Coca-Cola Prices"
+author: "Lagos Team"
+date: "1 November 2021"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+  pdf_document:
+    toc: yes
+---
+
+```{r echo=FALSE, include=FALSE}
+#knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
+# Set graph size
+#knitr::opts_chunk$set(echo = FALSE, out.width = "50%" )#fig.asp = 0.5, fig.width = 7, out.width = "90%" )
+
+library(tidyverse)
+library(modelsummary)
+library(kableExtra)
+library(viridis)
+
+# Import data
+df <- read.csv( 'https://raw.githubusercontent.com/viktoriakonya/lagos-team/main/coding-1/data/Data_DA1_HW1_Lagos.csv' )
+
+```
+
+
+```{r echo=FALSE, include=FALSE}
+
+### Data cleaning
+
+# 1. Correct ratings and NAs
+df <- df %>% 
+  mutate(google_rating = as.numeric(ifelse(google_rating!='N/A', substr(google_rating,1,3), NA))) 
+
+# 2. Correct number of reviews NA
+df <- df %>% 
+  mutate(number_of_reviews = as.numeric(ifelse(number_of_reviews=='N/A', NA, number_of_reviews))) 
+
+# 3. Create group for shop size
+levels(df$shop_type)
+
+df <- df %>% 
+  mutate(shop_type_group = ifelse(shop_type %in% c('Grocery', 'Gas station', "Supermarket", "Other"), "Big shop", "Small shop"))
+
+
+
+
+```
+
+## Introduction
+HERE COMES THE MOTIVATION WHY THIS IS A MEANINGFUL PROJECT AND WHAT IS THE MAIN GOAL!
+
+## Data
+HERE COMES A DETAILLED EXPLANATION ABOUT WHERE THE DATA COMES FROM AND IF IT IS REPRESENTATIVE OR NOT.
+
+
+```{r, echo=FALSE}
+
+# Summary table
+P95 <- function(x){quantile(x,0.95,na.rm=T)}
+P05 <- function(x){quantile(x,0.05,na.rm=T)}
+
+
+datasummary(  (`District` = as.factor(district) ) * (`Product` = as.factor(item_name)) * (`Price` = price_huf ) ~ 
+             NUnique + PercentMissing + Mean + SD + Min + Max +  P05 + Median + P95  + Histogram, 
+             data = df,
+             title = 'Descriptive statistics of prices by district',
+             notes = 'Add some notes' )
+        
+datasummary(  (`Shop type` = as.factor(shop_type_group) ) * (`District` = as.factor(district) ) * (`Product` = as.factor(item_name)) * (`Price` = price_huf ) ~ 
+             NUnique + PercentMissing + Mean + SD + Min + Max +  P05 + Median + P95  + Histogram, 
+             data = df,
+             title = 'Descriptive statistics of prices by district and shop size',
+             notes = 'Add some notes' )
+
+
+
+# %>% 
+            #kableExtra::kable_styling(latex_options = "hold_position")
+```
+
+
+
+# Viz
+
+```{r echo = F}
+df_11 <- df %>% 
+  filter(item_name == 'Snickers bar (50g)' & district == 10) 
+
+df_12 <- df %>% 
+  filter(item_name == 'Snickers bar (50g)' & district == 13) 
+
+df_21 <- df %>% 
+  filter(item_name == 'Coca Cola, 0.5l plastic bottle' & district == 10) 
+
+df_22 <- df %>% 
+  filter(item_name == 'Coca Cola, 0.5l plastic bottle' & district == 13) 
+
+# Histograms
+ggplot(data = df_11 , aes( x = price_huf) ) +
+  geom_histogram(binwidth = 20, aes( y = (..count..)/sum(..count..)), alpha =0.8) +
+  labs( x = "Price" , y = 'Frequency' , title="10th district, Snickers" ) +
+  scale_x_continuous(breaks = seq(0, 500, by = 50)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 5L)) +
+  theme_bw() +
+  theme(legend.position="none")
+
+ggplot(data = df_12 , aes( x = price_huf) ) +
+  geom_histogram(binwidth = 20, aes( y = (..count..)/sum(..count..)), alpha =0.8) +
+  labs( x = "Price" , y = 'Frequency', title="13th district, Snickers"  ) +
+  scale_x_continuous(breaks = seq(0, 500, by = 50)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 5L)) +
+  theme_bw() +
+  theme(legend.position="none")
+
+ggplot(data = df_21 , aes( x = price_huf) ) +
+  geom_histogram(binwidth = 20, aes( y = (..count..)/sum(..count..)), alpha =0.8) +
+  labs( x = "Price" , y = 'Frequency', title="10th district, Coca-Cola"  ) +
+  scale_x_continuous(breaks = seq(0, 500, by = 50)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 5L)) +
+  theme_bw() +
+  theme(legend.position="none")
+
+ggplot(data = df_22 , aes( x = price_huf) ) +
+  geom_histogram(binwidth = 20, aes( y = (..count..)/sum(..count..)), alpha =0.8) +
+  labs( x = "Price" , y = 'Frequency' , title="13th district, Coca-Cola" ) +
+  scale_x_continuous(breaks = seq(0, 500, by = 50)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 5L)) +
+  theme_bw() +
+  theme(legend.position="none")
+
+
+```
+
+
+```{r echo = F}
+
+# Boxplots
+
+df_1 <- df %>% 
+  filter(item_name == 'Snickers bar (50g)') 
+
+ggplot(data = df_1, aes(x = factor(district), y = price_huf)) +
+  stat_boxplot(aes(group = factor(district)), geom = "errorbar", width = 0.2, color = viridis(2, begin=0.2, end=0.8), size = 0.1) +
+  geom_boxplot(aes(group = factor(district)),  color = viridis(2, begin=0.2, end=0.8), fill = viridis(2, begin=0.2, end=0.8), size = 0.5, width =  0.5, alpha = 0.6) +  # , outlier.shape = NA
+  # geom_jitter(aes(color = factor(district)), position=position_jitter(0.1), size = 1.5, show.legend=F) +
+  labs(x = "District",y = "Price")+
+  scale_y_continuous(limits = c(100,350), breaks = seq(0,350,50)) +
+  scale_color_viridis(discrete = TRUE, option = "D", begin = 0.2, end=0.8)+
+  theme_bw() 
+
+
+df_2 <- df %>% 
+  filter(item_name == 'Coca Cola, 0.5l plastic bottle') 
+
+ggplot(data = df_2, aes(x = factor(district), y = price_huf)) +
+  stat_boxplot(aes(group = factor(district)), geom = "errorbar", width = 0.2, color = viridis(2, begin=0.2, end=0.8), size = 0.1) +
+  geom_boxplot(aes(group = factor(district)),  color = viridis(2, begin=0.2, end=0.8), fill = viridis(2, begin=0.2, end=0.8), size = 0.5, width =  0.5, alpha = 0.6) +  # , outlier.shape = NA
+  # geom_jitter(aes(color = factor(district)), position=position_jitter(0.1), size = 1.5, show.legend=F) +
+  labs(x = "District",y = "Price")+
+  scale_y_continuous(limits = c(100,500), breaks = seq(0,500,50)) +
+  scale_color_viridis(discrete = TRUE, option = "D", begin = 0.2, end=0.8)+
+  theme_bw() 
+
+```
+
+
+# Price and distance ??
+```{r}
+
+# Bin scatter (with jitter) by distance groups??
+
+```
+
+
+
+```{r echo = F}
+
+# Scatterplots 
+
+df_1 <- df %>% 
+  filter(item_name == 'Snickers bar (50g)') 
+
+ggplot(data = df_1, aes(x = distance_from_city_centre_km, y = price_huf, color = factor(district))) +
+  geom_point( size = 3,  shape = 16, alpha = 0.9,  na.rm = TRUE) +
+  scale_colour_viridis_d( begin = 0.2, end = 0.8) +
+  theme_bw()
+
+
+df_2 <- df %>% 
+  filter(item_name == 'Coca Cola, 0.5l plastic bottle') 
+
+ggplot(data = df_2, aes(x = distance_from_city_centre_km, y = price_huf, color = factor(district))) +
+  geom_point( size = 3,  shape = 16, alpha = 0.9, show.legend=FALSE, na.rm = TRUE) +
+  scale_colour_viridis_d( begin = 0.2, end = 0.8) +
+  theme_bw()
+
+
+```
+
+
+# T-test by district
+```{r}
+
+# 2 sample t-test
+
+# Snickers
+t.test(price_huf ~ district, data = df_1) # cannot reject H0
+
+# Cola
+t.test(price_huf ~ district, data = df_2) # cannot reject H0
+
+# Do the same by shop size as well
+
+
+
+```
+
+
+
+

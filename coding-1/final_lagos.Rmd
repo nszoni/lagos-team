@@ -21,7 +21,7 @@ library(kableExtra)
 library(viridis)
 
 # Import data
-df <- read.csv( 'https://raw.githubusercontent.com/viktoriakonya/lagos-team/main/coding-1/data/Data_DA1_HW1_Lagos.csv' )
+df <- read.csv( 'https://raw.githubusercontent.com/nszoni/lagos-team/main/coding-1/data/Data_DA1_HW1_Lagos.csv' )
 
 ```
 
@@ -44,8 +44,22 @@ levels(df$shop_type)
 df <- df %>% 
   mutate(shop_type_group = ifelse(shop_type %in% c('Grocery', 'Gas station', "Supermarket", "Other"), "Big shop", "Small shop"))
 
+# dplyr
+# district to factor
+#shop type
 
+df[df=='N']<-0
+df[df=='Y']<-1
+df$longitude <- as.numeric(df$longitude)
+df$latitude <- as.numeric(df$latitude)
+df$google_rating <- as.numeric(df$google_rating)
+df$number_of_reviews <- as.integer(df$number_of_reviews)
+df$collection_date <- as.POSIXlt(df$collection_date)
+df$is_discounted <- as.factor(df$is_discounted)
+df$has_website <- as.factor(df$has_website)
 
+df[df=='Coca Cola, 0.5l plastic bottle']<-'Coke'
+df[df=='Snickers bar (50g)']<-'Snickers'
 
 ```
 
@@ -64,13 +78,13 @@ P05 <- function(x){quantile(x,0.05,na.rm=T)}
 
 
 datasummary(  (`District` = as.factor(district) ) * (`Product` = as.factor(item_name)) * (`Price` = price_huf ) ~ 
-             NUnique + PercentMissing + Mean + SD + Min + Max +  P05 + Median + P95  + Histogram, 
+             NUnique + PercentMissing + Mean + SD + Min + Max +  P05 + Median + P95, 
              data = df,
              title = 'Descriptive statistics of prices by district',
              notes = 'Add some notes' )
         
 datasummary(  (`Shop type` = as.factor(shop_type_group) ) * (`District` = as.factor(district) ) * (`Product` = as.factor(item_name)) * (`Price` = price_huf ) ~ 
-             NUnique + PercentMissing + Mean + SD + Min + Max +  P05 + Median + P95  + Histogram, 
+             NUnique + PercentMissing + Mean + SD + Min + Max +  P05 + Median + P95, 
              data = df,
              title = 'Descriptive statistics of prices by district and shop size',
              notes = 'Add some notes' )
@@ -99,6 +113,20 @@ df_22 <- df %>%
   filter(item_name == 'Coca Cola, 0.5l plastic bottle' & district == 13) 
 
 # Histograms
+
+# joint districtwise
+# y-axis
+ggplot(df) + 
+  geom_histogram(aes(price_huf, y=..density.., fill=item_name), alpha=0.6, position="identity", bins = 10) +
+  geom_density(aes(price_huf, y=..density.., color=item_name), alpha=5) +
+  labs(x = "Price (HUF)",
+       y = "Frequency",
+       subtitle = "Snickers x Coke",
+       title = "Price distribution (HUF)",
+       caption = "lagos-team") +
+  theme_classic()
+
+
 ggplot(data = df_11 , aes( x = price_huf) ) +
   geom_histogram(binwidth = 20, aes( y = (..count..)/sum(..count..)), alpha =0.8) +
   labs( x = "Price" , y = 'Frequency' , title="10th district, Snickers" ) +
@@ -183,8 +211,10 @@ ggplot(data = df_2, aes(x = factor(district), y = price_huf)) +
 df_1 <- df %>% 
   filter(item_name == 'Snickers bar (50g)') 
 
+#bin scatter
 ggplot(data = df_1, aes(x = distance_from_city_centre_km, y = price_huf, color = factor(district))) +
   geom_point( size = 3,  shape = 16, alpha = 0.9,  na.rm = TRUE) +
+  geom_smooth(method='lm') +
   scale_colour_viridis_d( begin = 0.2, end = 0.8) +
   theme_bw()
 

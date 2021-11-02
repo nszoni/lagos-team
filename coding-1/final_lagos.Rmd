@@ -59,6 +59,8 @@ HERE COMES A DETAILLED EXPLANATION ABOUT WHERE THE DATA COMES FROM AND IF IT IS 
 
 ```{r, echo=FALSE}
 
+#TODO: review caption, add kableExtra tabular form
+
 # Summary table
 P95 <- function(x){quantile(x,0.95,na.rm=T)}
 P05 <- function(x){quantile(x,0.05,na.rm=T)}
@@ -84,6 +86,9 @@ datasummary(  (`District` = as.factor(district) ) * (`Product` = as.factor(item_
 # Viz
 
 ```{r echo = F}
+
+#TODO: figure it out whether the charts are meaningful, how we can interpret it. change colors of the bars to match others, maybe move in the legend box within the chart to save space on the right
+
 
 # Histograms
 
@@ -120,6 +125,8 @@ ggplot() +
 
 
 ```{r echo = F}
+
+#TODO: add general makeup to the charts (e.g. labs, scaling of axis so its visually more appealing -- less chunky box, longer body.), harmonize colors, add visibility to the whiskers. Add annotation to extreme values.
 
 # Boxplots
 

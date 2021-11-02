@@ -20,7 +20,7 @@ if (!require("pacman")) {
   install.packages("pacman")
 }
 
-pacman::p_load(tidyverse, modelsummary, viridis,
+pacman::p_load(tidyverse, ggplot2, modelsummary, viridis,
                kableExtra)
 
 # Import data
@@ -67,8 +67,8 @@ P05 <- function(x){quantile(x,0.05,na.rm=T)}
 # Ali do some table formatting with kableExtra package pls
 
 datasummary(  (`District` = as.factor(district) ) * (`Product` = as.factor(item_name)) * (`Price` = price_huf ) ~ 
-             NUnique + PercentMissing + Mean + SD + Min + Max +  P05 + Median + P95 + Histogram, 
-             data = df,
+             NUnique + PercentMissing + Mean + SD + Min + Max +  P05 + Median + P95, 
+             data = df_clean,
              title = 'Descriptive statistics of prices by district',
              notes = 'Intuitively the mean of both products are slightly higher in the inner 13th district. Also there is less variation in price of Snicker bars and more variation in the price of Coke. Those who are living in the inner city have to pay a larger entry price for Coke. The distribution of prices in teh inner district is shofted a bit considering the percentiles' )
 
@@ -84,65 +84,37 @@ datasummary(  (`District` = as.factor(district) ) * (`Product` = as.factor(item_
 # Viz
 
 ```{r echo = F}
-df_11 <- df %>% 
-  filter(item_name == 'Snickers bar (50g)' & district == 10) 
-
-df_12 <- df %>% 
-  filter(item_name == 'Snickers bar (50g)' & district == 13) 
-
-df_21 <- df %>% 
-  filter(item_name == 'Coca Cola, 0.5l plastic bottle' & district == 10) 
-
-df_22 <- df %>% 
-  filter(item_name == 'Coca Cola, 0.5l plastic bottle' & district == 13) 
 
 # Histograms
 
-# joint districtwise
-# y-axis
-ggplot(df) + 
-  geom_histogram(aes(price_huf, y=..density.., fill=item_name), alpha=0.6, position="identity", bins = 10) +
-  geom_density(aes(price_huf, y=..density.., color=item_name), alpha=5) +
+# Coke distribution
+df_clean %>% filter(item_name=='Coke 0.5l') %>% 
+ggplot() + 
+  geom_histogram(aes(price_huf, y=..density.., fill=district), binwidth = 30, alpha=0.6, position="identity", bins = 10) +
+  geom_density(aes(price_huf, y=..density.., color=district), position="identity", alpha=5) +
   labs(x = "Price (HUF)",
-       y = "Frequency",
-       subtitle = "Snickers x Coke",
+       y = "Density",
+       subtitle = "of Coca Cola 0.5l bottle",
        title = "Price distribution (HUF)",
        caption = "lagos-team") +
+  scale_color_discrete(name = "District") +
+  scale_fill_discrete(name = "District") +
   theme_classic()
 
 
-ggplot(data = df_11 , aes( x = price_huf) ) +
-  geom_histogram(binwidth = 20, aes( y = (..count..)/sum(..count..)), alpha =0.8) +
-  labs( x = "Price" , y = 'Frequency' , title="10th district, Snickers" ) +
-  scale_x_continuous(breaks = seq(0, 500, by = 50)) +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 5L)) +
-  theme_bw() +
-  theme(legend.position="none")
-
-ggplot(data = df_12 , aes( x = price_huf) ) +
-  geom_histogram(binwidth = 20, aes( y = (..count..)/sum(..count..)), alpha =0.8) +
-  labs( x = "Price" , y = 'Frequency', title="13th district, Snickers"  ) +
-  scale_x_continuous(breaks = seq(0, 500, by = 50)) +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 5L)) +
-  theme_bw() +
-  theme(legend.position="none")
-
-ggplot(data = df_21 , aes( x = price_huf) ) +
-  geom_histogram(binwidth = 20, aes( y = (..count..)/sum(..count..)), alpha =0.8) +
-  labs( x = "Price" , y = 'Frequency', title="10th district, Coca-Cola"  ) +
-  scale_x_continuous(breaks = seq(0, 500, by = 50)) +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 5L)) +
-  theme_bw() +
-  theme(legend.position="none")
-
-ggplot(data = df_22 , aes( x = price_huf) ) +
-  geom_histogram(binwidth = 20, aes( y = (..count..)/sum(..count..)), alpha =0.8) +
-  labs( x = "Price" , y = 'Frequency' , title="13th district, Coca-Cola" ) +
-  scale_x_continuous(breaks = seq(0, 500, by = 50)) +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 5L)) +
-  theme_bw() +
-  theme(legend.position="none")
-
+#Snickers distribution
+df_clean %>% filter(item_name=='Snickers 50g') %>% 
+ggplot() + 
+  geom_histogram(aes(price_huf, y=..density.., fill=district), binwidth = 30, alpha=0.6, position="identity", bins = 10) +
+  geom_density(aes(price_huf, y=..density.., color=district), position="identity", alpha=5) +
+  labs(x = "Price (HUF)",
+       y = "Density",
+       subtitle = "of Snickers 50g bar",
+       title = "Price distribution (HUF)",
+       caption = "lagos-team") +
+  scale_color_discrete(name = "District") +
+  scale_fill_discrete(name = "District") +
+  theme_classic()
 
 ```
 
@@ -151,65 +123,58 @@ ggplot(data = df_22 , aes( x = price_huf) ) +
 
 # Boxplots
 
-df_1 <- df %>% 
-  filter(item_name == 'Snickers bar (50g)') 
+df_clean %>% 
+  filter(item_name == 'Snickers 50g') %>% 
+  ggplot( aes(x = factor(district), y = price_huf)) +
+    stat_boxplot(aes(group = factor(district)), geom = "errorbar", width = 0.2, color = viridis(2, begin=0.2, end=0.8), size = 0.1) +
+    geom_boxplot(aes(group = factor(district)),  color = viridis(2, begin=0.2, end=0.8), fill = viridis(2, begin=0.2, end=0.8), size = 0.5, width =  0.5, alpha = 0.6) +  # , outlier.shape = NA
+    # geom_jitter(aes(color = factor(district)), position=position_jitter(0.1), size = 1.5, show.legend=F) +
+    labs(x = "District",y = "Price")+
+    scale_y_continuous(limits = c(100,350), breaks = seq(0,350,50)) +
+    scale_color_viridis(discrete = TRUE, option = "D", begin = 0.2, end=0.8)+
+    theme_bw() 
 
-ggplot(data = df_1, aes(x = factor(district), y = price_huf)) +
-  stat_boxplot(aes(group = factor(district)), geom = "errorbar", width = 0.2, color = viridis(2, begin=0.2, end=0.8), size = 0.1) +
-  geom_boxplot(aes(group = factor(district)),  color = viridis(2, begin=0.2, end=0.8), fill = viridis(2, begin=0.2, end=0.8), size = 0.5, width =  0.5, alpha = 0.6) +  # , outlier.shape = NA
-  # geom_jitter(aes(color = factor(district)), position=position_jitter(0.1), size = 1.5, show.legend=F) +
-  labs(x = "District",y = "Price")+
-  scale_y_continuous(limits = c(100,350), breaks = seq(0,350,50)) +
-  scale_color_viridis(discrete = TRUE, option = "D", begin = 0.2, end=0.8)+
-  theme_bw() 
 
-
-df_2 <- df %>% 
-  filter(item_name == 'Coca Cola, 0.5l plastic bottle') 
-
-ggplot(data = df_2, aes(x = factor(district), y = price_huf)) +
-  stat_boxplot(aes(group = factor(district)), geom = "errorbar", width = 0.2, color = viridis(2, begin=0.2, end=0.8), size = 0.1) +
-  geom_boxplot(aes(group = factor(district)),  color = viridis(2, begin=0.2, end=0.8), fill = viridis(2, begin=0.2, end=0.8), size = 0.5, width =  0.5, alpha = 0.6) +  # , outlier.shape = NA
-  # geom_jitter(aes(color = factor(district)), position=position_jitter(0.1), size = 1.5, show.legend=F) +
-  labs(x = "District",y = "Price")+
-  scale_y_continuous(limits = c(100,500), breaks = seq(0,500,50)) +
-  scale_color_viridis(discrete = TRUE, option = "D", begin = 0.2, end=0.8)+
-  theme_bw() 
+df_clean %>% 
+  filter(item_name == 'Coke 0.5l') %>% 
+  ggplot(aes(x = factor(district), y = price_huf)) +
+    stat_boxplot(aes(group = factor(district)), geom = "errorbar", width = 0.2, color = viridis(2, begin=0.2, end=0.8), size = 0.1) +
+    geom_boxplot(aes(group = factor(district)),  color = viridis(2, begin=0.2, end=0.8), fill = viridis(2, begin=0.2, end=0.8), size = 0.5, width =  0.5, alpha = 0.6) +  # , outlier.shape = NA
+    # geom_jitter(aes(color = factor(district)), position=position_jitter(0.1), size = 1.5, show.legend=F) +
+    labs(x = "District",y = "Price")+
+    scale_y_continuous(limits = c(100,500), breaks = seq(0,500,50)) +
+    scale_color_viridis(discrete = TRUE, option = "D", begin = 0.2, end=0.8)+
+    theme_bw() 
 
 ```
-
-
-# Price and distance ??
-```{r}
-
-# Bin scatter (with jitter) by distance groups??
-
-```
-
-
+# Price and distance
 
 ```{r echo = F}
 
 # Scatterplots 
 
-df_1 <- df %>% 
-  filter(item_name == 'Snickers bar (50g)') 
+#TODO: (1) prettier charts (colors, axes, legend labels, scaling, labs(title, subtitle, caption)), (2) color consistency with other charts
 
-#bin scatter
-ggplot(data = df_1, aes(x = distance_from_city_centre_km, y = price_huf, color = factor(district))) +
-  geom_point( size = 3,  shape = 16, alpha = 0.9,  na.rm = TRUE) +
-  geom_smooth(method='lm') +
-  scale_colour_viridis_d( begin = 0.2, end = 0.8) +
-  theme_bw()
+df_clean %>% 
+  filter(item_name == 'Snickers 50g') %>% 
+  ggplot(aes(x = distance_from_city_centre_km, y = price_huf, color = factor(district))) +
+    geom_point( size = 3,  shape = 16, alpha = 0.9,  na.rm = TRUE) +
+    #stat_summary_bin(fun.y='mean', bins=20, #bin scatter
+                      #color='red', size=2, geom='point') + 
+    geom_smooth(method='lm', se=F) +
+    scale_colour_viridis_d( begin = 0.2, end = 0.8) +
+    theme_bw()
 
 
-df_2 <- df %>% 
-  filter(item_name == 'Coca Cola, 0.5l plastic bottle') 
-
-ggplot(data = df_2, aes(x = distance_from_city_centre_km, y = price_huf, color = factor(district))) +
-  geom_point( size = 3,  shape = 16, alpha = 0.9, show.legend=FALSE, na.rm = TRUE) +
-  scale_colour_viridis_d( begin = 0.2, end = 0.8) +
-  theme_bw()
+df_clean %>% 
+  filter(item_name == 'Coke 0.5l') %>% 
+  ggplot(aes(x = distance_from_city_centre_km, y = price_huf, color = factor(district))) +
+    geom_point( size = 3,  shape = 16, alpha = 0.9,  na.rm = TRUE) +
+    #stat_summary_bin(fun.y='mean', bins=20, #bin scatter
+                      #color='red', size=2, geom='point') + 
+    geom_smooth(method='lm', se=F) +
+    scale_colour_viridis_d( begin = 0.2, end = 0.8) +
+    theme_bw()
 
 
 ```
@@ -221,14 +186,10 @@ ggplot(data = df_2, aes(x = distance_from_city_centre_km, y = price_huf, color =
 # 2 sample t-test
 
 # Snickers
-t.test(price_huf ~ district, data = df_1) # cannot reject H0
+t.test(price_huf ~ district, data = filter(df_clean,item_name=='Snickers 50g')) # cannot reject H0 at 5%
 
 # Cola
-t.test(price_huf ~ district, data = df_2) # cannot reject H0
-
-# Do the same by shop size as well
-
-
+t.test(price_huf ~ district, data = filter(df_clean,item_name=='Coke 0.5l')) # cannot reject H0 at 5%
 
 ```
 

@@ -15,10 +15,13 @@ output:
 # Set graph size
 #knitr::opts_chunk$set(echo = FALSE, out.width = "50%" )#fig.asp = 0.5, fig.width = 7, out.width = "90%" )
 
-library(tidyverse)
-library(modelsummary)
-library(kableExtra)
-library(viridis)
+# Loading packages with pacman
+if (!require("pacman")) {
+  install.packages("pacman")
+}
+
+pacman::p_load(tidyverse, modelsummary, viridis,
+               kableExtra)
 
 # Import data
 df <- read.csv( 'https://raw.githubusercontent.com/nszoni/lagos-team/main/coding-1/data/Data_DA1_HW1_Lagos.csv' )
@@ -30,36 +33,20 @@ df <- read.csv( 'https://raw.githubusercontent.com/nszoni/lagos-team/main/coding
 
 ### Data cleaning
 
-# 1. Correct ratings and NAs
-df <- df %>% 
-  mutate(google_rating = as.numeric(ifelse(google_rating!='N/A', substr(google_rating,1,3), NA))) 
 
-# 2. Correct number of reviews NA
-df <- df %>% 
-  mutate(number_of_reviews = as.numeric(ifelse(number_of_reviews=='N/A', NA, number_of_reviews))) 
-
-# 3. Create group for shop size
-levels(df$shop_type)
-
-df <- df %>% 
-  mutate(shop_type_group = ifelse(shop_type %in% c('Grocery', 'Gas station', "Supermarket", "Other"), "Big shop", "Small shop"))
-
-# dplyr
-# district to factor
-#shop type
-
-df[df=='N']<-0
-df[df=='Y']<-1
-df$longitude <- as.numeric(df$longitude)
-df$latitude <- as.numeric(df$latitude)
-df$google_rating <- as.numeric(df$google_rating)
-df$number_of_reviews <- as.integer(df$number_of_reviews)
-df$collection_date <- as.POSIXlt(df$collection_date)
-df$is_discounted <- as.factor(df$is_discounted)
-df$has_website <- as.factor(df$has_website)
-
-df[df=='Coca Cola, 0.5l plastic bottle']<-'Coke'
-df[df=='Snickers bar (50g)']<-'Snickers'
+df_clean <- df %>% 
+  mutate(google_rating = as.numeric(ifelse(google_rating!='N/A', substr(google_rating,1,3), NA)), # 1. Correct ratings and NAs
+         number_of_reviews = as.numeric(ifelse(number_of_reviews=='N/A', NA, number_of_reviews)), # 2. Correct number of reviews NA
+         shop_type_group = as.factor(ifelse(shop_type %in% c('Grocery', 'Gas station', "Supermarket", "Other"), "Big shop", "Small shop")), # 3. Create group for shop size
+         is_discounted = as.factor(ifelse(is_discounted=='Y', 1, 0)), # 4. Replace booelan flags
+         has_website = as.factor(ifelse(has_website=='Y', 1, 0)),
+         longitude = as.numeric(longitude), # 5. Data casting
+         latitude = as.numeric(latitude),
+         google_rating = as.numeric(google_rating),
+         number_of_reviews = as.integer(number_of_reviews),
+         collection_date = as.POSIXct(collection_date),
+         district = as.factor(district), 
+         item_name = ifelse(item_name == 'Coca Cola, 0.5l plastic bottle', 'Coke 0.5l', 'Snickers 50g')) #5. Shortening item names
 
 ```
 
@@ -77,25 +64,22 @@ P95 <- function(x){quantile(x,0.95,na.rm=T)}
 P05 <- function(x){quantile(x,0.05,na.rm=T)}
 
 
+# Ali do some table formatting with kableExtra package pls
+
 datasummary(  (`District` = as.factor(district) ) * (`Product` = as.factor(item_name)) * (`Price` = price_huf ) ~ 
-             NUnique + PercentMissing + Mean + SD + Min + Max +  P05 + Median + P95, 
+             NUnique + PercentMissing + Mean + SD + Min + Max +  P05 + Median + P95 + Histogram, 
              data = df,
              title = 'Descriptive statistics of prices by district',
-             notes = 'Add some notes' )
-        
-datasummary(  (`Shop type` = as.factor(shop_type_group) ) * (`District` = as.factor(district) ) * (`Product` = as.factor(item_name)) * (`Price` = price_huf ) ~ 
-             NUnique + PercentMissing + Mean + SD + Min + Max +  P05 + Median + P95, 
-             data = df,
-             title = 'Descriptive statistics of prices by district and shop size',
-             notes = 'Add some notes' )
+             notes = 'Intuitively the mean of both products are slightly higher in the inner 13th district. Also there is less variation in price of Snicker bars and more variation in the price of Coke. Those who are living in the inner city have to pay a larger entry price for Coke. The distribution of prices in teh inner district is shofted a bit considering the percentiles' )
 
+# by shop size     
+# datasummary(  (`Shop type` = as.factor(shop_type_group) ) * (`District` = as.factor(district) ) * (`Product` = as.factor(item_name)) * (`Price` = price_huf ) ~ 
+#              NUnique + PercentMissing + Mean + SD + Min + Max +  P05 + Median + P95, 
+#              data = df,
+#              title = 'Descriptive statistics of prices by district and shop size',
+#              notes = 'Add some notes' )
 
-
-# %>% 
-            #kableExtra::kable_styling(latex_options = "hold_position")
 ```
-
-
 
 # Viz
 

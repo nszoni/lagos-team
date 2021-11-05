@@ -3,10 +3,10 @@ title: "Report on Snickers and Coca-Cola Prices"
 author: "Lagos Team"
 date: "1 November 2021"
 output:
+  pdf_document:
+    toc: yes
   html_document:
     df_print: paged
-    toc: yes
-  pdf_document:
     toc: yes
 ---
 
@@ -20,7 +20,7 @@ if (!require("pacman")) {
   install.packages("pacman")
 }
 
-pacman::p_load(tidyverse, ggplot2, modelsummary, viridis,
+pacman::p_load(tidyverse, modelsummary, viridis,
                kableExtra)
 
 # Import data
@@ -59,20 +59,19 @@ HERE COMES A DETAILLED EXPLANATION ABOUT WHERE THE DATA COMES FROM AND IF IT IS 
 
 ```{r, echo=FALSE}
 
-#TODO: review caption, add kableExtra tabular form
+#TODO: add kableExtra tabular form
 
 # Summary table
 P95 <- function(x){quantile(x,0.95,na.rm=T)}
 P05 <- function(x){quantile(x,0.05,na.rm=T)}
 
-
-# Ali do some table formatting with kableExtra package pls
-
-datasummary(  (`District` = as.factor(district) ) * (`Product` = as.factor(item_name)) * (`Price` = price_huf ) ~ 
-             NUnique + PercentMissing + Mean + SD + Min + Max +  P05 + Median + P95, 
+datasummary((`Product` = as.factor(item_name)) * (`District` = as.factor(district) ) * (`Price` = price_huf ) ~ 
+             NUnique + PercentMissing + Mean + SD + Min + Max +  P05 + Median +   P95, 
              data = df_clean,
              title = 'Descriptive statistics of prices by district',
              notes = 'Intuitively the mean of both products are slightly higher in the inner 13th district. Also there is less variation in price of Snicker bars and more variation in the price of Coke. Those who are living in the inner city have to pay a larger entry price for Coke. The distribution of prices in teh inner district is shofted a bit considering the percentiles' )
+
+
 
 # by shop size     
 # datasummary(  (`Shop type` = as.factor(shop_type_group) ) * (`District` = as.factor(district) ) * (`Product` = as.factor(item_name)) * (`Price` = price_huf ) ~ 
@@ -87,38 +86,37 @@ datasummary(  (`District` = as.factor(district) ) * (`Product` = as.factor(item_
 
 ```{r echo = F}
 
-#TODO: figure it out whether the charts are meaningful, how we can interpret it. change colors of the bars to match others, maybe move in the legend box within the chart to save space on the right
-
+#TODO: I think, We should remove this one because it is quite the as the Scatterplot chart and the length of the html would be too long.
 
 # Histograms
 
 # Coke distribution
 df_clean %>% filter(item_name=='Coke 0.5l') %>% 
 ggplot() + 
-  geom_histogram(aes(price_huf, y=..density.., fill=district), binwidth = 30, alpha=0.6, position="identity", bins = 10) +
+  geom_histogram(aes(price_huf, y=..density.., fill=district), binwidth = 30, alpha=0.6, position="dodge", bins = 10) +
   geom_density(aes(price_huf, y=..density.., color=district), position="identity", alpha=5) +
   labs(x = "Price (HUF)",
        y = "Density",
        subtitle = "of Coca Cola 0.5l bottle",
        title = "Price distribution (HUF)",
        caption = "lagos-team") +
-  scale_color_discrete(name = "District") +
-  scale_fill_discrete(name = "District") +
+  scale_fill_viridis_d( begin = 0.2, end = 0.8, name = "District") +
+  scale_colour_viridis_d( begin = 0.2, end = 0.8, name = "District") +
   theme_classic()
 
 
 #Snickers distribution
 df_clean %>% filter(item_name=='Snickers 50g') %>% 
 ggplot() + 
-  geom_histogram(aes(price_huf, y=..density.., fill=district), binwidth = 30, alpha=0.6, position="identity", bins = 10) +
+  geom_histogram(aes(price_huf, y=..density.., fill=district), binwidth = 30, alpha=0.6, position="dodge", bins = 10) +
   geom_density(aes(price_huf, y=..density.., color=district), position="identity", alpha=5) +
-  labs(x = "Price (HUF)",
+ labs(x = "Price (HUF)",
        y = "Density",
        subtitle = "of Snickers 50g bar",
        title = "Price distribution (HUF)",
        caption = "lagos-team") +
-  scale_color_discrete(name = "District") +
-  scale_fill_discrete(name = "District") +
+  scale_fill_viridis_d( begin = 0.2, end = 0.8, name = "District") +
+  scale_colour_viridis_d( begin = 0.2, end = 0.8, name = "District") +
   theme_classic()
 
 ```
@@ -126,17 +124,21 @@ ggplot() +
 
 ```{r echo = F}
 
-#TODO: add general makeup to the charts (e.g. labs, scaling of axis so its visually more appealing -- less chunky box, longer body.), harmonize colors, add visibility to the whiskers. Add annotation to extreme values.
+#TODO: Add annotation to extreme values
 
 # Boxplots
+
 
 df_clean %>% 
   filter(item_name == 'Snickers 50g') %>% 
   ggplot( aes(x = factor(district), y = price_huf)) +
-    stat_boxplot(aes(group = factor(district)), geom = "errorbar", width = 0.2, color = viridis(2, begin=0.2, end=0.8), size = 0.1) +
-    geom_boxplot(aes(group = factor(district)),  color = viridis(2, begin=0.2, end=0.8), fill = viridis(2, begin=0.2, end=0.8), size = 0.5, width =  0.5, alpha = 0.6) +  # , outlier.shape = NA
+    stat_boxplot(aes(group = factor(district)), geom = "errorbar", width = 0.2, color = "black", size = 0.3) +
+    geom_boxplot(aes(group = factor(district)),  color = viridis(2, begin=0.2, end=0.8), fill = viridis(2, begin=0.2, end=0.8), size = 0.4, width = 0.15, alpha = 0.4) + # , outlier.shape = NA
     # geom_jitter(aes(color = factor(district)), position=position_jitter(0.1), size = 1.5, show.legend=F) +
-    labs(x = "District",y = "Price")+
+    labs(x = "District",y = "Price",
+         subtitle = "of Coca Cola 0.5l bottle",
+       title = "Price desnity by district (HUF)",
+       caption = "lagos-team") +
     scale_y_continuous(limits = c(100,350), breaks = seq(0,350,50)) +
     scale_color_viridis(discrete = TRUE, option = "D", begin = 0.2, end=0.8)+
     theme_bw() 
@@ -145,11 +147,14 @@ df_clean %>%
 df_clean %>% 
   filter(item_name == 'Coke 0.5l') %>% 
   ggplot(aes(x = factor(district), y = price_huf)) +
-    stat_boxplot(aes(group = factor(district)), geom = "errorbar", width = 0.2, color = viridis(2, begin=0.2, end=0.8), size = 0.1) +
-    geom_boxplot(aes(group = factor(district)),  color = viridis(2, begin=0.2, end=0.8), fill = viridis(2, begin=0.2, end=0.8), size = 0.5, width =  0.5, alpha = 0.6) +  # , outlier.shape = NA
+    stat_boxplot(aes(group = factor(district)), geom = "errorbar", width = 0.2, color = "black", size = 0.3) +
+    geom_boxplot(aes(group = factor(district)),  color = viridis(2, begin=0.2, end=0.8), fill = viridis(2, begin=0.2, end=0.8), size = 0.4, width =  0.15, alpha = 0.4) +  # , outlier.shape = NA
     # geom_jitter(aes(color = factor(district)), position=position_jitter(0.1), size = 1.5, show.legend=F) +
-    labs(x = "District",y = "Price")+
-    scale_y_continuous(limits = c(100,500), breaks = seq(0,500,50)) +
+    labs(x = "District",y = "Price",
+          subtitle = "of Snickers 50g bar",
+      title = "Price desnity by district (HUF)",
+       caption = "lagos-team") +
+    scale_y_continuous(limits = c(200, 450), breaks = seq(0,450,50)) +
     scale_color_viridis(discrete = TRUE, option = "D", begin = 0.2, end=0.8)+
     theme_bw() 
 
@@ -160,16 +165,16 @@ df_clean %>%
 
 # Scatterplots 
 
-#TODO: (1) prettier charts (colors, axes, legend labels, scaling, labs(title, subtitle, caption)), (2) color consistency with other charts
-
 df_clean %>% 
   filter(item_name == 'Snickers 50g') %>% 
   ggplot(aes(x = distance_from_city_centre_km, y = price_huf, color = factor(district))) +
     geom_point( size = 3,  shape = 16, alpha = 0.9,  na.rm = TRUE) +
-    #stat_summary_bin(fun.y='mean', bins=20, #bin scatter
-                      #color='red', size=2, geom='point') + 
-    geom_smooth(method='lm', se=F) +
-    scale_colour_viridis_d( begin = 0.2, end = 0.8) +
+    geom_smooth(method='lm',  linetype = "dashed", se = F) +
+    labs(x = "Distance from city centre (km)",y = "Price (HUF)",
+          subtitle = "of Snickers 50g bar",
+      title = "Relationship between price and distance form city centre",
+      caption = "lagos-team") +
+    scale_colour_viridis_d( begin = 0.2, end = 0.8, name = "District") +
     theme_bw()
 
 
@@ -177,10 +182,12 @@ df_clean %>%
   filter(item_name == 'Coke 0.5l') %>% 
   ggplot(aes(x = distance_from_city_centre_km, y = price_huf, color = factor(district))) +
     geom_point( size = 3,  shape = 16, alpha = 0.9,  na.rm = TRUE) +
-    #stat_summary_bin(fun.y='mean', bins=20, #bin scatter
-                      #color='red', size=2, geom='point') + 
-    geom_smooth(method='lm', se=F) +
-    scale_colour_viridis_d( begin = 0.2, end = 0.8) +
+    geom_smooth(method='lm', linetype = "dashed", se = F) +
+    labs(x = "Distance from city centre (km)",y = "Price (HUF)",
+          subtitle = "of Snickers 50g bar",
+      title = "Relationship between price and distance form city centre",
+      caption = "lagos-team") +
+    scale_colour_viridis_d( begin = 0.2, end = 0.8, name = "District") +
     theme_bw()
 
 

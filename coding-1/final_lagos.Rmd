@@ -2,12 +2,12 @@
 title: "Report on Snickers and Coca-Cola Prices"
 author: "Lagos Team"
 date: "1 November 2021"
+geometry: margin=2cm
+fontsize: 9pt
 output:
   pdf_document:
-    toc: yes
   html_document:
     df_print: paged
-    toc: yes
 ---
 
 ```{r echo=FALSE, include=FALSE}
@@ -21,12 +21,13 @@ if (!require("pacman")) {
 }
 
 pacman::p_load(tidyverse, modelsummary, viridis,
-               kableExtra)
+               kableExtra, patchwork)
 
 # Import data
 df <- read.csv( 'https://raw.githubusercontent.com/nszoni/lagos-team/main/coding-1/data/Data_DA1_HW1_Lagos.csv' )
 
 ```
+
 
 
 ```{r echo=FALSE, include=FALSE}
@@ -51,16 +52,25 @@ df_clean <- df %>%
 ```
 
 ## Introduction
-HERE COMES THE MOTIVATION WHY THIS IS A MEANINGFUL PROJECT AND WHAT IS THE MAIN GOAL!
 
-## Data
-HERE COMES A DETAILLED EXPLANATION ABOUT WHERE THE DATA COMES FROM AND IF IT IS REPRESENTATIVE OR NOT.
+To identify price change tendencies in two conventional products: Coca-Cola 500ml plastic bottle and Snickers 50gr, within the city of Budapest, particularly in the 10th and 13th districts, we want to see what effects are caused by allocation of the product from inner versus outer city. Our data set and artifacts can be found on our [Github repo](https://github.com/nszoni/lagos-team/coding-1/)
+
+## Data Quality and Cleaning
+Data collection was conducted over the weekend of Sept 25th-26h between noon and early afternoon. The quailty of data was enured througout the process and a criteria was established for smaple selection.
+
+Our data cleaning process had four main phases. Firstly, we replaced ‘N/A’ string with the conventional NA. Secondly, we did a dimensionality reduction by aggregating group types into big and small types. Thirdly, we replaced boolean encoding with binary dummy values. Lastly, we casted all the columns to match their data types specified in the variables table above and shortened the name of the products to reduce clutter on charts and tables.
+
+## Descriptive Statistics
+We are able to detect extreme values in our data set, which are items that are found within gas stations, which could potentially tell us that price rises based on momentum and desire, not strictly adhere to location of the district, but an amplification of sampling would be needed. 
+
+Price for snickers is almost standardized in both districts, since the majority of data is concentrated in a certain price range, while for coke the range is wider, which makes us look into the distance as factor, for coke it seems that it does make an increase but not for snickers.
 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.align = 'center', }
 
 #TODO: add kableExtra tabular form
 
+  
 # Summary table
 P95 <- function(x){quantile(x,0.95,na.rm=T)}
 P05 <- function(x){quantile(x,0.05,na.rm=T)}
@@ -68,64 +78,54 @@ P05 <- function(x){quantile(x,0.05,na.rm=T)}
 datasummary((`Product` = as.factor(item_name)) * (`District` = as.factor(district) ) * (`Price` = price_huf ) ~ 
              NUnique + PercentMissing + Mean + SD + Min + Max +  P05 + Median +   P95, 
              data = df_clean,
-             title = 'Descriptive statistics of prices by district',
-             notes = 'Intuitively the mean of both products are slightly higher in the inner 13th district. Also there is less variation in price of Snicker bars and more variation in the price of Coke. Those who are living in the inner city have to pay a larger entry price for Coke. The distribution of prices in teh inner district is shofted a bit considering the percentiles' )
+             title = 'Descriptive statistics of prices by district'
+            )%>%
+    kableExtra::kable_styling(latex_options = "hold_position", font_size = 8)
 
-
-
-# by shop size     
-# datasummary(  (`Shop type` = as.factor(shop_type_group) ) * (`District` = as.factor(district) ) * (`Product` = as.factor(item_name)) * (`Price` = price_huf ) ~ 
-#              NUnique + PercentMissing + Mean + SD + Min + Max +  P05 + Median + P95, 
-#              data = df,
-#              title = 'Descriptive statistics of prices by district and shop size',
-#              notes = 'Add some notes' )
+'Intuitively the mean of both products are slightly higher in the inner 13th district. Also there is less variation in price of Snicker bars and more variation in the price of Coke. Those who are living in the inner city have to pay a larger entry price for Coke. The distribution of prices in teh inner district is shofted a bit considering the percentiles'
 
 ```
 
-# Viz
+## Price Distribution 
+The team decide to select a comibination of both histogram and density plot to show the distribution of prices for both the products in two districts. Histogram with a bin size of 10 was used becuase the price difference and frequecy of each price could be easily displayed, while desity plot shows how the distribution looks like, making it easier to visualise. 
 
-```{r echo = F}
-
-#TODO: I think, We should remove this one because it is quite the as the Scatterplot chart and the length of the html would be too long.
+```{r echo = F, warning=FALSE, fig.height = 3, fig.align="center"}
 
 # Histograms
 
 # Coke distribution
-df_clean %>% filter(item_name=='Coke 0.5l') %>% 
-ggplot() + 
-  geom_histogram(aes(price_huf, y=..density.., fill=district), binwidth = 30, alpha=0.6, position="dodge", bins = 10) +
-  geom_density(aes(price_huf, y=..density.., color=district), position="identity", alpha=5) +
-  labs(x = "Price (HUF)",
-       y = "Density",
-       subtitle = "of Coca Cola 0.5l bottle",
-       title = "Price distribution (HUF)",
-       caption = "lagos-team") +
-  scale_fill_viridis_d( begin = 0.2, end = 0.8, name = "District") +
-  scale_colour_viridis_d( begin = 0.2, end = 0.8, name = "District") +
-  theme_classic()
+hist_fig_1 <- df_clean %>% filter(item_name=='Coke 0.5l') %>% 
+                ggplot() + 
+                geom_histogram(aes(price_huf, y=..density.., fill=district), binwidth = 30, alpha=0.6, position="dodge", bins = 10) +
+                geom_density(aes(price_huf, y=..density.., color=district), position="identity", alpha=5) +
+                labs(x = "Price (HUF)",
+                     y = "Density",
+                     title = "Coca Cola 0.5l bottle",
+                     caption = "Max price was HUF 449 & HUF 439 in district 10 & 13, respectively") +
+                scale_fill_viridis_d( begin = 0.2, end = 0.8, name = "District") +
+                scale_colour_viridis_d( begin = 0.2, end = 0.8, name = "District") +
+                theme_classic()
 
 
 #Snickers distribution
-df_clean %>% filter(item_name=='Snickers 50g') %>% 
-ggplot() + 
-  geom_histogram(aes(price_huf, y=..density.., fill=district), binwidth = 30, alpha=0.6, position="dodge", bins = 10) +
-  geom_density(aes(price_huf, y=..density.., color=district), position="identity", alpha=5) +
- labs(x = "Price (HUF)",
-       y = "Density",
-       subtitle = "of Snickers 50g bar",
-       title = "Price distribution (HUF)",
-       caption = "lagos-team") +
-  scale_fill_viridis_d( begin = 0.2, end = 0.8, name = "District") +
-  scale_colour_viridis_d( begin = 0.2, end = 0.8, name = "District") +
-  theme_classic()
+hist_fig_2 <- df_clean %>% filter(item_name=='Snickers 50g') %>% 
+                ggplot() + 
+                geom_histogram(aes(price_huf, y=..density.., fill=district), binwidth = 30, alpha=0.6, position="dodge", bins = 10) +
+                geom_density(aes(price_huf, y=..density.., color=district), position="identity", alpha=5) +
+               labs(x = "Price (HUF)",
+                     y = "Density",
+                     title = "Snickers 50g bar",
+                     caption = "Max price was HUF 319 & HUF 299 in district 10 & 13, respectively") +
+                scale_fill_viridis_d( begin = 0.2, end = 0.8, name = "District") +
+                scale_colour_viridis_d( begin = 0.2, end = 0.8, name = "District") +
+                theme_classic()
+
+hist_fig_1 + hist_fig_2 + plot_layout(guides = "collect")
 
 ```
 
-
-```{r echo = F}
-
-#TODO: Add annotation to extreme values
-
+```{r echo=F, warning=F, message=F, fig.show='hide'}
+# hide
 # Boxplots
 
 
@@ -159,54 +159,37 @@ df_clean %>%
     theme_bw() 
 
 ```
-# Price and distance
 
-```{r echo = F}
 
+## Price and Distance
+To display the results of our second analysis, "relationship between price and distance from centre" a scator plots were used to display for both the product. For both products in District 13 the price increased as you moved away from the city centre, while in District 10 price decreased. 
+
+```{r echo=F, fig.align='center', fig.height=3, warning=FALSE, message=FALSE}
 # Scatterplots 
 
-df_clean %>% 
-  filter(item_name == 'Snickers 50g') %>% 
-  ggplot(aes(x = distance_from_city_centre_km, y = price_huf, color = factor(district))) +
-    geom_point( size = 3,  shape = 16, alpha = 0.9,  na.rm = TRUE) +
-    geom_smooth(method='lm',  linetype = "dashed", se = F) +
-    labs(x = "Distance from city centre (km)",y = "Price (HUF)",
-          subtitle = "of Snickers 50g bar",
-      title = "Relationship between price and distance form city centre",
-      caption = "lagos-team") +
-    scale_colour_viridis_d( begin = 0.2, end = 0.8, name = "District") +
-    theme_bw()
+scatter_fig_1 <- df_clean %>% 
+                    filter(item_name == 'Snickers 50g') %>% 
+                    ggplot(aes(x = distance_from_city_centre_km, y = price_huf, color = factor(district))) +
+                      geom_point( size = 3,  shape = 16, alpha = 0.9,  na.rm = TRUE) +
+                      geom_smooth(method='lm',  linetype = "dashed", se = F) +
+                      labs(x = "Distance from city centre (km)",y = "Price (HUF)",
+                        title = "Coca Cola 0.5l bottle",
+                        caption = "District 13 upward slop, District 10 downward slop") +
+                      scale_colour_viridis_d( begin = 0.2, end = 0.8, name = "District") +
+                      theme_bw()
 
 
-df_clean %>% 
-  filter(item_name == 'Coke 0.5l') %>% 
-  ggplot(aes(x = distance_from_city_centre_km, y = price_huf, color = factor(district))) +
-    geom_point( size = 3,  shape = 16, alpha = 0.9,  na.rm = TRUE) +
-    geom_smooth(method='lm', linetype = "dashed", se = F) +
-    labs(x = "Distance from city centre (km)",y = "Price (HUF)",
-          subtitle = "of Snickers 50g bar",
-      title = "Relationship between price and distance form city centre",
-      caption = "lagos-team") +
-    scale_colour_viridis_d( begin = 0.2, end = 0.8, name = "District") +
-    theme_bw()
+scatter_fig_2 <- df_clean %>% 
+                    filter(item_name == 'Coke 0.5l') %>% 
+                    ggplot(aes(x = distance_from_city_centre_km, y = price_huf, color = factor(district))) +
+                      geom_point( size = 3,  shape = 16, alpha = 0.9,  na.rm = TRUE) +
+                      geom_smooth(method='lm', linetype = "dashed", se = F) +
+                      labs(x = "Distance from city centre (km)",y = "Price (HUF)",
+                        title = "Snickers 50g bar",
+                        caption = "District 13 upward slop, District 10 downward slop") +
+                      scale_colour_viridis_d( begin = 0.2, end = 0.8, name = "District") +
+                      theme_bw()
 
-
+scatter_fig_1 + scatter_fig_2 + plot_layout(guides = "collect")
 ```
-
-
-# T-test by district
-```{r}
-
-# 2 sample t-test
-
-# Snickers
-t.test(price_huf ~ district, data = filter(df_clean,item_name=='Snickers 50g')) # cannot reject H0 at 5%
-
-# Cola
-t.test(price_huf ~ district, data = filter(df_clean,item_name=='Coke 0.5l')) # cannot reject H0 at 5%
-
-```
-
-
-
 

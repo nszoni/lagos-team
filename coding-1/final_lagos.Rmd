@@ -63,9 +63,7 @@ The focus of our analysis is on the prices of the two products. In order to incr
 
 
 ## Descriptive Statistics
-We are able to detect extreme values in our data set, which are items that are found within gas stations, which could potentially tell us that price rises based on momentum and desire, not strictly adhere to location of the district, but an amplification of sampling would be needed. 
-
-Price for snickers is almost standardized in both districts, since the majority of data is concentrated in a certain price range, while for coke the range is wider, which makes us look into the distance as factor, for coke it seems that it does make an increase but not for snickers.
+To further understand and analyze the price differential for both the products in the two selected districts, a statistics summary table provided below was the first step. It includes the mean, median, standard deviation, minimum price, maximum price, range, 5th percentile and 95th percentile along with missing values. 
 
 
 ```{r, echo=FALSE, fig.align = 'center', }
@@ -104,10 +102,12 @@ datasummary((`District` = as.factor(district))  * ( (`Coke 0.5l` = `Coke 0.5l`  
 
 ```
 
-Intuitively the mean of both products are slightly higher in the inner 13th district. Also there is less variation in price of Snicker bars and more variation in the price of Coke. Those who are living in the inner city have to pay a larger entry price for Coke. The distribution of prices in teh inner district is shofted a bit considering the percentiles.
+As per the table, intuitively, the mean for Coke 0.5l bottle is slightly higher in the inner 13th district (HUF 318.4) as compared to out 10th district (HUF 304.5). While on the other hand, for Snickers 50grams there isn’t a huge difference in the mean price with 13th district having lower mean compared to 10th district  (district 13th = HUF 192.6 and district 10th = 193.8).
+Also we can observed there is less variation in price of Snicker bars and more variation in the price of Coke. Furthermore, it was noticed that the range of prices for the both the products were around HUF 200 (in both the districts). Therefore, our team decided to further investigate this point and created two main question for analysis. For each product, the first question would highlight the price difference between districts and second to analyze price difference based on distance from the city center in both districts. 
 
-## Price Distribution 
-The team decide to select a comibination of both histogram and density plot to show the distribution of prices for both the products in two districts. Histogram with a bin size of 10 was used becuase the price difference and frequecy of each price could be easily displayed, while desity plot shows how the distribution looks like, making it easier to visualise. 
+
+## Price Distribution based on District
+The team decided to select a combination of both histogram and density plot to show the distribution of prices for both the products in each district. Histogram with a bin size of 10 was used because the price difference and frequency price could be easily displayed, while density plot shows how the distribution looks like, making it easier to visualize. 
 
 ```{r echo = F, warning=FALSE, fig.height = 3, fig.align="center"}
 
@@ -146,8 +146,10 @@ hist_fig_1 + hist_fig_2 + plot_layout(guides = "collect")
 
 ```
 
+For Coke 0.5l, based on the graph below, majority of the prices (for both districts) is in the range of HUF 300 to HUF 320 which compliments the mean calculations. Overall, both the districts tends to have the same distribution with slightly right long tails. The distribution for Snickers 50grams is also similar in both districts i.e. slight right skewed. 
+
+
 ```{r echo=F, warning=F, message=F, fig.show='hide'}
-# hide
 # Boxplots
 
 
@@ -183,8 +185,8 @@ df_clean %>%
 ```
 
 
-## Price and Distance
-To display the results of our second analysis, "relationship between price and distance from centre" a scator plots were used to display for both the product. For both products in District 13 the price increased as you moved away from the city centre, while in District 10 price decreased. 
+## Price Distribution based on Distance
+To display the results of our second analysis, "relationship between price and distance from center" scatter plots were used to for both the product. 
 
 ```{r echo=F, fig.align='center', fig.height=3, warning=FALSE, message=FALSE}
 # Scatterplots 
@@ -215,3 +217,8 @@ scatter_fig_2 <- df_clean %>%
 scatter_fig_1 + scatter_fig_2 + plot_layout(guides = "collect")
 ```
 
+As shown in the graph below, it can be observed that for both products in District 13 the price increased as you moved away from the city center, Thus an upwards slop of the line of best fit. In contrary to that, in District 10 prices for both the products decreased as you go further away from the city center which is shown by downward slop of the line of best fit . Adding to that, both the graphs further show a unique crossover of prices in the middle which is between the range of 4kms to 6kms away from city center and highlights that prices tend to high in that region regardless of the product.  
+
+
+# Conclusion
+Segueing on the analysis, the district and distance from city center in that district are trivial to understand the distribution of price change for both the products reviewed. It is not wrong to conclude that on average the price is similar in both the districts, but customers buying any of these products in the range of  4km – 6km distance from the city center, regardless of the district, tend to pay more as compared other areas in the district. To have a more conclusive understanding of this distribution, more factors and variables could be added to the analysis.  

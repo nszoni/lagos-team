@@ -5,9 +5,9 @@ date: "7 November 2021"
 geometry: margin=1.8cm
 fontsize: 9pt
 output:
+  pdf_document:
   html_document:
     df_print: paged
-  pdf_document:
 header-includes: |
   \usepackage{titling}
   \setlength{\droptitle}{-5em} 
@@ -56,7 +56,7 @@ df_clean <- df %>%
 ## Introduction
 
 Can we encounter lower prices in the outer districts then in the inner districts? What if we go farther away from the city center? In order to examine these questions, product prices were collected from two districts of Budapest, the $13^{th}$ and the $10^{th}$, representing the inner and outer parts of the city. Our objective with the data collection was to compare retail prices of two chosen products, Coca-Cola 500ml plastic bottle and Snickers 50gr chocolate bar in the two areas. In order to examine the differences in the price distributions, product tags were gathered from shops of different sizes including supermarkets, gas stations, as well as small local groceries.
-Our data set and artifacts can be found on our [Github repo](https://github.com/nszoni/lagos-team/)
+Our data set and artifacts can be found on our [Github repo](https://github.com/nszoni/lagos-team/tree/main/coding-1)
 
 
 ## Data Quality and Cleaning

@@ -28,7 +28,6 @@ df <- read.csv( 'https://raw.githubusercontent.com/nszoni/lagos-team/main/coding
 
 ```
 
-
 ```{r echo=FALSE, include=FALSE}
 
 ### Data cleaning
@@ -183,7 +182,6 @@ df_clean %>%
 
 ```
 
-
 ## Price Distribution based on Distance
 To display the results of our second analysis, "relationship between price and distance from center" scatter plots were used to for both the product. 
 
@@ -215,9 +213,9 @@ scatter_fig_2 <- df_clean %>%
 
 scatter_fig_1 + scatter_fig_2 + plot_layout(guides = "collect")
 ```
-
 As shown in the graph below, it can be observed that for both products in District 13 the price increased as you moved away from the city center, Thus an upwards slop of the line of best fit. In contrary to that, in District 10 prices for both the products decreased as you go further away from the city center which is shown by downward slop of the line of best fit . Adding to that, both the graphs further show a unique crossover of prices in the middle which is between the range of 4kms to 6kms away from city center and highlights that prices tend to high in that region regardless of the product.  
 
 
 # Conclusion
-Segueing on the analysis, the district and distance from city center in that district are trivial to understand the distribution of price change for both the products reviewed. It is not wrong to conclude that on average the price is similar in both the districts, but customers buying any of these products in the range of  4km – 6km distance from the city center, regardless of the district, tend to pay more as compared other areas in the district. To have a more conclusive understanding of this distribution, more factors and variables could be added to the analysis.  
+Segueing o
+n the analysis, the district and distance from city center in that district are trivial to understand the distribution of price change for both the products reviewed. It is not wrong to conclude that on average the price is similar in both the districts, but customers buying any of these products in the range of  4km – 6km distance from the city center, regardless of the district, tend to pay more as compared other areas in the district. To have a more conclusive understanding of this distribution, more factors and variables could be added to the analysis.  

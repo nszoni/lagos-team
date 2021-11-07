@@ -29,7 +29,6 @@ df <- read.csv( 'https://raw.githubusercontent.com/nszoni/lagos-team/main/coding
 ```
 
 
-
 ```{r echo=FALSE, include=FALSE}
 
 ### Data cleaning

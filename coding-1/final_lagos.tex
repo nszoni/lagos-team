@@ -1,0 +1,178 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  9pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Report on Snickers and Coca-Cola Prices},
+  pdfauthor={Lagos Team},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=2cm]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{siunitx}
+\newcolumntype{d}{S[input-symbols = ()]}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Report on Snickers and Coca-Cola Prices}
+\author{Lagos Team}
+\date{7 November 2021}
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+To identify price change tendencies in two conventional products:
+Coca-Cola 500ml plastic bottle and Snickers 50gr, within the city of
+Budapest, particularly in the 10th and 13th districts, we want to see
+what effects are caused by allocation of the product from inner versus
+outer city. Our data set and artifacts can be found on our
+\href{https://github.com/nszoni/lagos-team/coding-1/}{Github repo}
+
+\hypertarget{data-quality-and-cleaning}{%
+\subsection{Data Quality and Cleaning}\label{data-quality-and-cleaning}}
+
+Data collection was conducted over the weekend of Sept 25th-26h between
+noon and early afternoon. The quailty of data was enured througout the
+process and a criteria was established for smaple selection.
+
+Our data cleaning process had four main phases. Firstly, we replaced
+`N/A' string with the conventional NA. Secondly, we did a dimensionality
+reduction by aggregating group types into big and small types. Thirdly,
+we replaced boolean encoding with binary dummy values. Lastly, we casted
+all the columns to match their data types specified in the variables
+table above and shortened the name of the products to reduce clutter on
+charts and tables. ``ectreme valuess''
+
+\hypertarget{descriptive-statistics}{%
+\subsection{Descriptive Statistics}\label{descriptive-statistics}}
+
+We are able to detect extreme values in our data set, which are items
+that are found within gas stations, which could potentially tell us that
+price rises based on momentum and desire, not strictly adhere to
+location of the district, but an amplification of sampling would be
+needed.
+
+Price for snickers is almost standardized in both districts, since the
+majority of data is concentrated in a certain price range, while for
+coke the range is wider, which makes us look into the distance as
+factor, for coke it seems that it does make an increase but not for
+snickers.
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-3}Descriptive statistics of product prices by district}
+\centering
+\fontsize{8}{10}\selectfont
+\begin{tabular}[t]{llrrrrrrrrrr}
+\toprule
+District &   & N & Missing & Mean & Median & SD & Min & Max & Range & P05 & P95\\
+\midrule
+10 & Coke 0.5l & 15 & \num{0} & \num{304.5} & \num{299} & \num{52.43} & 230 & 449 & \num{219} & \num{244} & \num{380}\\
+ & Snickers 50g & 14 & \num{1} & \num{193.8} & \num{189} & \num{49.50} & 119 & 319 & \num{200} & \num{120} & \num{274}\\
+13 & Coke 0.5l & 14 & \num{1} & \num{318.4} & \num{304} & \num{52.63} & 259 & 439 & \num{180} & \num{259} & \num{426}\\
+ & Snickers 50g & 15 & \num{0} & \num{192.6} & \num{180} & \num{46.96} & 119 & 299 & \num{180} & \num{147} & \num{299}\\
+\bottomrule
+\multicolumn{12}{l}{\rule{0pt}{1em}}\\
+\end{tabular}
+\end{table}
+
+Intuitively the mean of both products are slightly higher in the inner
+13th district. Also there is less variation in price of Snicker bars and
+more variation in the price of Coke. Those who are living in the inner
+city have to pay a larger entry price for Coke. The distribution of
+prices in teh inner district is shofted a bit considering the
+percentiles.
+
+\hypertarget{price-distribution}{%
+\subsection{Price Distribution}\label{price-distribution}}
+
+The team decide to select a comibination of both histogram and density
+plot to show the distribution of prices for both the products in two
+districts. Histogram with a bin size of 10 was used becuase the price
+difference and frequecy of each price could be easily displayed, while
+desity plot shows how the distribution looks like, making it easier to
+visualise.
+
+\begin{center}\includegraphics{final_lagos_files/figure-latex/unnamed-chunk-4-1} \end{center}
+
+\hypertarget{price-and-distance}{%
+\subsection{Price and Distance}\label{price-and-distance}}
+
+To display the results of our second analysis, ``relationship between
+price and distance from centre'' a scator plots were used to display for
+both the product. For both products in District 13 the price increased
+as you moved away from the city centre, while in District 10 price
+decreased.
+
+\begin{center}\includegraphics{final_lagos_files/figure-latex/unnamed-chunk-6-1} \end{center}
+
+\end{document}

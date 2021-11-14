@@ -41,7 +41,9 @@ Additional parameters of the dataset
 - 1695 roles
 - from 20 different years
 
-[![](images/imdb_ERD.PNG)](images/imdb_ERD.PNG)
+<p align="center">
+  <img height= 400 src="images/imdb_ERD.PNG">
+</p>
 
 Our `MySQL` instance was hosted on `AWS’ RDS service` (under a Free Tier subscription with the smallest machine). For setting up connection, we had allowed every incoming `IP addresses` through the firewall when defining `Security Groups`. Viki was the one who managed these resources and initialized the necessary infrastructure.
 

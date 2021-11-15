@@ -88,11 +88,14 @@ The following chart summarizes the whole workflow of our data product. The color
 
 [![](images/workflow_mod.svg)](images/workflow_mod.svg)
 
-### Data Ingestion
+### Data Ingestion (A)
 
 We used the `MySQL Connector` node to pull in data from our AWS instance and the `DB Query Reader` to denormalize our schema.
 
-### API Requests
+### Reading data from flat file (B)
+A csv file containing the TMDb movie_id-s and the titles of the movies was read from our GitHub folder with a File Reader node.
+
+### API Requests (C)
 
 Two API requests were created for each movie: the first response included primary information about the movie (such as the budget and the runtime), while the second response had textual data about the movie reviews.
 
@@ -100,20 +103,20 @@ Two API requests were created for each movie: the first response included primar
 - Next, we generated GET Request URLs for each movie IDs via String Manipulation and stored responses as JSON objects
 - Having all that, we extracted the necessary JSON values as separate columns such as the budget, revenue, runtime, reviews etc. of the movies.
 
-### Data Cleaning of the IMDb Database
+### Data Cleaning of the IMDb Database (D)
 
 - A small Java snippet was used to fix missing rank values for movies such as Batman Begins and Pirates of the Caribbean. 
 - We noticed that there are inconsistencies in the titles of the movies, such as articles being after nouns, separated with commas. (e.g. Godfather, The). 
 - After that, we also wanted to simplify the names of the actors and directors as there were a lot of family titles included in their names, so we cleaned them.
 - To reduce the number of columns required for extracting the actor and director information, we merged first, and last names separated in the raw IMDb dataset.
 
-### Data Cleaning of the TMDb Reviews Data
+### Data Cleaning of the TMDb Reviews Data (F)
 
 In case of the IMDb movie reviews response, further transformations were needed to prepare the textual data for analysis:
 
 As reviews were queried in a list, the elements of the list needed to be converted to string and concatenated into one string field.
 
-### Post-transformations
+### Post-transformations (E)
 
 After the IMBD and the TMDb data sources were inner joined, further transformations were needed:
 
@@ -121,7 +124,7 @@ After the IMBD and the TMDb data sources were inner joined, further transformati
 - We converted the currencies for clarity to double formats, with having thousands separators
 - Also, we broke up the list of production companies per movie to both separate row and columns for further visualization
 
-### R Snippet
+### R Snippet (G)
 
 We decided to implement a very basic, dictionary based sentiment analysis with the movie reviews retrieved also from the TMDb database. For this analysis, we enriched our workflow with an R Snippet.
 

@@ -84,7 +84,7 @@ In order to get the responses for all movies in our dataset, the necessary URL s
 
 ## KNIME Worfklow
 
-The following chart summarizes the whole workflow of our data product. The colored boxes indicate the type of the operation that the nodes included in the box do. We differentiated between the following phases: loading data sources (blue), data transformation and cleaning (green) and visualization (yellow).
+The following chart summarizes the whole workflow of our data product. The colored boxes indicate the type of the operation that the nodes included in the box do. We differentiated between the following operations: loading data sources (blue), data transformation and cleaning (green) and visualization (yellow).
 
 [![](images/workflow_mod.svg)](images/workflow_mod.svg)
 

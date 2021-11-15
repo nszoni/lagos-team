@@ -60,7 +60,7 @@ A sample TMDb API request looks like the following:
 `https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US`
 Where the two required parameters are the movie_id, which is the TMDb’s unique identifier of the movies and the api_key.
 
-In order to get the responses for all movies in our dataset, the necessary URL strings were generated within Knime.
+In order to get the responses for all movies in our dataset, the necessary URL strings were generated within KNIME.
 
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 <!-- ANALYTICAL QUESTION---------------------------------------------------------------------------------------------------------------------------------------------------- -->

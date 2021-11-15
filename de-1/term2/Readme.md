@@ -176,7 +176,7 @@ Each movie tends to have more than one production house in the dataset. Therefor
 
 ### 4. Sentiment Analysis (What is the general sentiment about the movies based on it’s reviews?)
 
-Finally, we have added a visualization of the identified sentiment words in the reviews. For this, we used the output of the R node with the positive and negative words. The below chart shows the distribution of these words across movies. 
+Finally, we have added a visualization of the identified sentiment words in the reviews. For this, we used the output of the R node with the positive and negative words and we simply counted thair occurances. The below chart shows the distribution of these words across movies. 
 
 <p align="center">
   <img height= 500 src="https://github.com/nszoni/lagos-team/blob/main/de-1/term2/images/sentiment_analysis.png">

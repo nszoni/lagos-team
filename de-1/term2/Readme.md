@@ -154,17 +154,33 @@ Four visualizations were created which were later integrated into an interactive
 
 In order to answer this question, a few further nodes were added to display the required information in a visual. First, a group by node was added to group data by movies. Since both revenues and budgets were mainly in a million, two additional nodes of math formula were added to rescale both the values. For the final stage, a stacked bar chart was used to show the comparison. As it is clearly visible from the chart, the revenues from Titanic leads the way with more than 2 billion dollars.
 
+<p align="center">
+  <img height= 500 src="https://github.com/nszoni/lagos-team/blob/main/de-1/term2/images/movies_budgets_revenues.png">
+</p>
+
 ### 2. Directors by Genres (What are the different genres of movies that each director has worked on?)
 
 The calculation for the answer of this question was rather straightforward. A group by node was used to group directors by genres. To display this information, a sunburst chart was used since it allows interactions required to explain this chart when presenting it. Which means you filter directors based on genres.As per the chart, there are few directors who have worked with multiple genres.
+
+<p align="center">
+  <img height= 500 src="https://github.com/nszoni/lagos-team/blob/main/de-1/term2/images/sunburst_chart.png">
+</p>
 
 ### 3. Movies per Production House (How many movies did each production house produce?)
 
 Each movie tends to have more than one production house in the dataset. Therefore, to answer this question, an ungroup node followed by a Groupby node was used to include all the production houses that have worked on any of the movies in the data. Since the majority of the production houses had only worked with one to two movies, we decided to include only the top 10 production houses (production houses with most movies). To do this, a Top k selector node was added to filter top 10 production houses which were then added to the bar chart node for visualisation. 
 
+<p align="center">
+  <img height= 500 src="https://github.com/nszoni/lagos-team/blob/main/de-1/term2/images/top_production_companies.png">
+</p>
+
 ### 4. Sentiment Analysis (What is the general sentiment about the movies based on it’s reviews?)
 
 Finally, we have added a visualization of the identified sentiment words in the reviews. For this, we used the output of the R node with the positive and negative words. The below chart shows the distribution of these words across movies. 
+
+<p align="center">
+  <img height= 500 src="https://github.com/nszoni/lagos-team/blob/main/de-1/term2/images/sentiment_analysis.png">
+</p>
 
 ## Tasks and responsibilities
 

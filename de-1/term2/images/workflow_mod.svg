@@ -120,7 +120,7 @@
                 <path d="M1519 339 L1581 339 L1581 402 L1519 402 L1519 339 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath36">
-                <path d="M1537 349 L1566 349 L1566 397 L1537 397 L1537 349 Z"/>
+                <path d="M1533 349 L1570 349 L1570 397 L1533 397 L1533 349 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath37">
                 <path d="M37 118 L134 118 L134 150 L37 150 L37 118 Z"/>
@@ -831,8 +831,8 @@
         </g>
         <g stroke-width="10" font-size="40" font-family="&apos;Arial&apos;"
            font-weight="bold" stroke-linecap="butt">
-            <text xml:space="preserve" x="1538" y="387"
-                  clip-path="url(#clipPath36)" stroke="none">F</text>
+            <text xml:space="preserve" x="1534" y="387"
+                  clip-path="url(#clipPath36)" stroke="none">G</text>
         </g><g fill="rgb(138,226,52)" stroke-width="10"
            font-family="&apos;Segoe UI&apos;" stroke-linecap="butt"
            stroke="rgb(138,226,52)">
@@ -2801,8 +2801,8 @@ WQAAAABJRU5ErkJggg==" xlink:actuate="onLoad"/>
         <g stroke-linecap="butt" font-size="40"
            text-rendering="optimizeLegibility" font-family="&apos;Arial&apos;"
            font-weight="bold" stroke-width="10">
-            <text xml:space="preserve" x="1538" y="387"
-                  clip-path="url(#clipPath36)" stroke="none">F</text>
+            <text xml:space="preserve" x="1534" y="387"
+                  clip-path="url(#clipPath36)" stroke="none">G</text>
         </g><g stroke-linecap="butt" fill="rgb(138,226,52)"
            text-rendering="optimizeLegibility"
            font-family="&apos;Segoe UI&apos;" stroke="rgb(138,226,52)"

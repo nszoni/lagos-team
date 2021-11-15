@@ -47,7 +47,7 @@ We chose to work with a relational dataset on IMDb data, because it was somewhat
 - from 20 different years
 
 <p align="center">
-  <img height= 400 src="images/imdb_ERD.PNG">
+  <img height= 300 src="images/imdb_ERD.PNG">
 </p>
 
 Our MySQL instance was hosted on AWS’ RDS service (under a Free Tier subscription with the smallest machine). For setting up connection, we had allowed every incoming IP addresses through the firewall when defining Security Groups.

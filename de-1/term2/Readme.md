@@ -36,7 +36,7 @@ When all things were in place, we dropped KNIME on top of the `MySQL` database, 
 
 ### IMDB Database
 
-We chose to work with a relational dataset on `IMDb data`, because it was somewhat limited, thereby easier to expand it with other `API` sources. A small sample of the data was retrieved from a public `MariaDB` instance (considering the size of our virtual machine and the goal of this project) and ingested in bulk via a a list of CREATE TABLE statements in `/staging` accompanied with a custom `Shell` script found in `de-1/term2/staging/stg_bulk_extract.sh` to our `MySQL` instance. The `Snowflake schema` of the relational database can be best-described with the following `ERD` diagram.
+We chose to work with a relational dataset on `IMDb data`, because it was somewhat limited, thereby easier to expand it with other `API` sources. A small sample of the data was retrieved from a public `MariaDB` instance (considering the size of our virtual machine and the goal of this project) and ingested in bulk via a a list of CREATE TABLE statements in `/staging/` accompanied with a custom `Shell` script found in `de-1/term2/staging/stg_bulk_extract.sh` to our `MySQL` instance. The `Snowflake schema` of the relational database can be best-described with the following `ERD` diagram.
 
 
 - 36 distinct movies
